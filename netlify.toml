@@ -1,0 +1,8 @@
+# netlify toml configuration
+[build]
+base = "./"
+publish = "./dist/netlify-serverless"
+command = "ng build"
+
+[functions]
+directory = "./netlify/functions"

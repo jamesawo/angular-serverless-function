@@ -22,7 +22,9 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "esModuleInterop": true,
+    "isolatedModules": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
