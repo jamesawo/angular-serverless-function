@@ -55,4 +55,4 @@ This project is licensed under the MIT license.
 
 ## Thank you 
 
-Please let me know if you have any issues or feature requests.
+Please let me know if you want to contribute to this project or have any feature requests.
