@@ -20,7 +20,6 @@ export class BlogComponent implements OnInit {
 	public getPosts(): void {
 		const base = window.location.origin;
 		this.http.post(`${base}/.netlify/functions/greet`, { id: 2 }).subscribe(response => {
-			console.log(response)
 		});
 	}
 

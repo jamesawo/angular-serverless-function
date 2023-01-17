@@ -17,6 +17,9 @@ import { BlogPostComponent } from './components/blog-post/blog-post.component';
 import { TagComponent } from './components/tag/tag.component';
 import { ProjectComponent } from './components/project/project.component';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
+import { LightSwitchComponent } from './components/theme/light-switch/light-switch.component';
+import { DarkSwitchComponent } from './components/theme/dark-switch/dark-switch.component';
+import { ToggleSwitchComponent } from './components/theme/toggle-switch/toggle-switch.component';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { BookmarkComponent } from './components/bookmark/bookmark.component';
 		BlogPostComponent,
   TagComponent,
   ProjectComponent,
-  BookmarkComponent
+  BookmarkComponent,
+  LightSwitchComponent,
+  DarkSwitchComponent,
+  ToggleSwitchComponent
 	],
 	imports: [
 		BrowserModule,
