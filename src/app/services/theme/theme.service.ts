@@ -23,7 +23,7 @@ export class ThemeService {
 
 	public getThemePref(): string {
 		const localPref = localStorage.getItem(this.prefKey);
-		return localPref || this.pref.value;
+		return localPref || this.pref?.value;
 	}
 
 }
