@@ -14,6 +14,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BlogPostComponent } from './components/blog-post/blog-post.component';
+import { TagComponent } from './components/tag/tag.component';
+import { ProjectComponent } from './components/project/project.component';
+import { BookmarkComponent } from './components/bookmark/bookmark.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { BlogPostComponent } from './components/blog-post/blog-post.component';
 		HomeComponent,
 		HeaderComponent,
 		FooterComponent,
-		BlogPostComponent
+		BlogPostComponent,
+  TagComponent,
+  ProjectComponent,
+  BookmarkComponent
 	],
 	imports: [
 		BrowserModule,

@@ -1,14 +1,15 @@
 <section id="intro" class="mt-32">
-	<div class="flex flex-col gap-1">
+	<div class="flex flex-col gap-1 text-black dark:text-white">
 		<h1 class="text-4xl font-bold ">Blog</h1>
 		<p class="text-justify  text-base">
 			Welcome to my blog section.
 		</p>
-		<p class="text-justify  text-base"></p>
+		<p class="text-justify text-base"></p>
 	</div>
 </section>
 
-<section id="post" class="">
-	<button class="bg-red-700 p-1 mt-2 rounded-sm hover:bg-red-300" (click)="getPosts()">Get Post</button>
-	<app-blog-post *ngFor="let post of posts"></app-blog-post>
+<section id="post" class="text-black dark:text-white">
+	<div class="mt-12">
+		<app-blog-post></app-blog-post>
+	</div>
 </section>

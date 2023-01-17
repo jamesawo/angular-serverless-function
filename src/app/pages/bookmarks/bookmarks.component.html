@@ -1,5 +1,5 @@
 <section id="intro" class="relative  mt-32">
-	<div class="flex flex-col gap-3">
+	<div class="flex flex-col gap-3 text-dark dark:text-white">
 		<h1 class="text-4xl font-bold ">Bookmarks</h1>
 
 		<p class="text-justify  text-base">
@@ -12,59 +12,13 @@
 			</p>
 
 			<div class="flex flex-row flex-wrap gap-2">
-				<span class="h-max text-sm font-medium
-                                                    bg-pink-300 py-1 px-2 rounded text-black align-middle
-                                                    hover:bg-pink-500 hover:text-black">
-					web
-				</span>
-				<span class="h-max text-sm font-medium
-                                                                            bg-pink-300 py-1 px-2 rounded text-black align-middle
-                                                                            hover:bg-pink-500 hover:text-black">
-					design patterns
-				</span>
-				<span
-					class="h-max text-sm font-medium
-                                                                                                    bg-pink-300 py-1 px-2 rounded text-black align-middle
-                                                                                                    hover:bg-pink-500 hover:text-black">
-					tech news
-				</span>
+				<app-tag text="web"></app-tag>
+				<app-tag text="design patterns"></app-tag>
+				<app-tag text="tech news"></app-tag>
 			</div>
 		</div>
 
 	</div>
 </section>
 
-<section class="mt-12 flex flex-col gap-16">
-
-	<div class="flex flex-col gap-3">
-		<a href="#" class="hover:underline">
-			<h3 class="text-black font-bold ">
-				Idered/tailwindcss-radix-ui: Style Radix UI components with TailwindCSS</h3>
-		</a>
-
-		<a href="#" class=" text-gray-700 text-sm hover:underline">
-			github.com/Idered/tailwindcss-radix-ui
-		</a>
-
-		<div class="flex flex-col align-middle items-center justify-items-center justify-between w-6/12 sm:flex-row ">
-			<div class="flex flex-row gap-2">
-				<span class="h-max text-sm font-medium
-                                                                        bg-pink-300 py-1 px-2 rounded text-black align-middle
-                                                                        hover:bg-pink-500 hover:text-black">
-					web
-				</span>
-
-				<span
-					class="h-max text-sm font-medium
-                                                                                            bg-pink-300 py-1 px-2 rounded text-black align-middle
-                                                                                            hover:bg-pink-500 hover:text-black">
-					jsts
-				</span>
-
-			</div>
-
-			<span class="text-gray-500 text-sm mt-3 sm:mt-0 sm:ml-3">Saved November 12, 2022</span>
-		</div>
-	</div>
-
-</section>
+<app-bookmark></app-bookmark>
