@@ -1,3 +1,4 @@
+import { PostService } from './services/blog/post.service';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,7 @@ import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import { LightSwitchComponent } from './components/theme/light-switch/light-switch.component';
 import { DarkSwitchComponent } from './components/theme/dark-switch/dark-switch.component';
 import { ToggleSwitchComponent } from './components/theme/toggle-switch/toggle-switch.component';
+import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 
 
 @NgModule({
@@ -32,12 +34,13 @@ import { ToggleSwitchComponent } from './components/theme/toggle-switch/toggle-s
 		HeaderComponent,
 		FooterComponent,
 		BlogPostComponent,
-  TagComponent,
-  ProjectComponent,
-  BookmarkComponent,
-  LightSwitchComponent,
-  DarkSwitchComponent,
-  ToggleSwitchComponent
+		TagComponent,
+		ProjectComponent,
+		BookmarkComponent,
+		LightSwitchComponent,
+		DarkSwitchComponent,
+		ToggleSwitchComponent,
+  SkeletonLoaderComponent
 	],
 	imports: [
 		BrowserModule,
@@ -46,7 +49,7 @@ import { ToggleSwitchComponent } from './components/theme/toggle-switch/toggle-s
 		HttpClientModule,
 		MarkdownModule.forRoot(),
 	],
-	providers: [],
+	providers: [PostService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

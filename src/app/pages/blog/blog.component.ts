@@ -1,26 +1,24 @@
-
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { PostService } from './../../services/blog/post.service';
 import { Component, OnInit } from '@angular/core';
+
+import { BlogPost } from '../../lib/types.interface';
 
 
 @Component({
 	selector: 'app-blog',
 	templateUrl: './blog.component.html',
-	styleUrls: ['./blog.component.css']
+	styles: [],
 })
 export class BlogComponent implements OnInit {
+	public posts?: Observable<BlogPost[]>;
 
-	public posts?: any[];
-
-	public constructor(private http: HttpClient) { }
+	public constructor(
+		private postService: PostService,
+	) { }
 
 	ngOnInit(): void {
-	}
-
-	public getPosts(): void {
-		const base = window.location.origin;
-		this.http.post(`${base}/.netlify/functions/greet`, { id: 2 }).subscribe(response => {
-		});
+		this.posts = this.postService.posts;
 	}
 
 }
