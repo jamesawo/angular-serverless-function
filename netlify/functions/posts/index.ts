@@ -1,29 +1,51 @@
-import { BlogPost } from './../../../src/app/lib/types.interface';
 import { Handler } from '@netlify/functions';
+
+import { create } from '../posts/create';
+import { all } from '../posts/all'
 
 
 const handler: Handler = async (event, context) => {
+	// console.log(event);
+	let body;
+	try {
+		switch (event.httpMethod) {
+			case 'GET':
 
-	const blogPost: BlogPost = {
-		author: 'James Aworo',
-		content: `
-## Typographic replacements
+				body = await all(event);
+				break;
 
-Enable typographer option to see result.
+			case 'POST':
+				console.log('in post method');
+				create(event);
+				break;
 
-(c) (C) (r) (R) (tm) (TM) (p) (P) +-
+			case 'PUT':
+				break;
 
-test.. test... test..... test?..... test!....
-		`,
-		date: '2022-02-12',
-		title: 'A Simple Dummy Post',
-		_id: 'abasdbn-asdhjksd-asjdhbksj',
+			case 'DELETE':
+				break;
+
+			default:
+				return {
+					statusCode: 405,
+					body: JSON.stringify({ message: 'Method not supported' })
+				}
+		}
+
+		console.log(body);
+		return {
+			statusCode: 200,
+			body: JSON.stringify({ data: body })
+		};
+
+	} catch (err: any) {
+
+		return {
+			statusCode: 500,
+			body: JSON.stringify({ message: err.toString() })
+		}
 	}
 
-	return {
-		statusCode: 200,
-		body: JSON.stringify({ data: [blogPost, blogPost] })
-	};
 }
 
 export { handler };
