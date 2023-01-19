@@ -5,17 +5,15 @@ import { all } from '../posts/all'
 
 
 const handler: Handler = async (event, context) => {
-	// console.log(event);
+
 	let body;
 	try {
 		switch (event.httpMethod) {
 			case 'GET':
-
 				body = await all(event);
 				break;
 
 			case 'POST':
-				console.log('in post method');
 				create(event);
 				break;
 
@@ -32,7 +30,6 @@ const handler: Handler = async (event, context) => {
 				}
 		}
 
-		console.log(body);
 		return {
 			statusCode: 200,
 			body: JSON.stringify({ data: body })

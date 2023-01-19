@@ -11,6 +11,6 @@
 <section id="post" class="text-black dark:text-white">
 	<div class="mt-12">
 		<app-skeleton-loader *ngIf="!(posts | async)"></app-skeleton-loader>
-		<app-blog-post [post]="item" *ngFor="let item of posts | async"></app-blog-post>
+		<app-post [post]="item" *ngFor="let item of posts | async"></app-post>
 	</div>
 </section>

@@ -14,7 +14,7 @@ import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { BlogPostComponent } from './components/blog-post/blog-post.component';
+import { PostComponent } from './components/post/post.component';
 import { TagComponent } from './components/tag/tag.component';
 import { ProjectComponent } from './components/project/project.component';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
@@ -22,6 +22,7 @@ import { LightSwitchComponent } from './components/theme/light-switch/light-swit
 import { DarkSwitchComponent } from './components/theme/dark-switch/dark-switch.component';
 import { ToggleSwitchComponent } from './components/theme/toggle-switch/toggle-switch.component';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
+import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 
 
 @NgModule({
@@ -33,14 +34,15 @@ import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-l
 		HomeComponent,
 		HeaderComponent,
 		FooterComponent,
-		BlogPostComponent,
+		PostComponent,
 		TagComponent,
 		ProjectComponent,
 		BookmarkComponent,
 		LightSwitchComponent,
 		DarkSwitchComponent,
 		ToggleSwitchComponent,
-  SkeletonLoaderComponent
+		SkeletonLoaderComponent,
+		BlogPostComponent
 	],
 	imports: [
 		BrowserModule,

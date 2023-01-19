@@ -8,17 +8,18 @@ import { BlogPost } from '../../lib/types.interface';
 @Component({
 	selector: 'app-blog',
 	templateUrl: './blog.component.html',
-	styles: [],
+	providers: []
 })
 export class BlogComponent implements OnInit {
 	public posts?: Observable<BlogPost[]>;
+
 
 	public constructor(
 		private postService: PostService,
 	) { }
 
 	ngOnInit(): void {
-		this.posts = this.postService.posts;
+		this.posts = this.postService.posts$;
 	}
 
 }

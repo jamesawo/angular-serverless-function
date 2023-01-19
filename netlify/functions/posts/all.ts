@@ -5,9 +5,7 @@ const mongoUrl = process.env['MONGODB_URL'];
 const dbName = process.env['MONGODB_NAME'];
 
 const all = async (event: HandlerEvent) => {
-
 	const client = new MongoClient(mongoUrl);
-
 	try {
 		await client.connect();
 		const db = client.db(dbName);
