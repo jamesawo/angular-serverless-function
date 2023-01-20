@@ -7,7 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class PostComponent {
 
+
 	@Input()
 	post?: BlogPost;
 
+	public toDateString(arg?: string) {
+		return new Date(arg!).toDateString();
+	}
 }
