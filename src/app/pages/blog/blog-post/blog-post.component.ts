@@ -8,7 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
 	selector: 'app-blog-post',
 	templateUrl: './blog-post.component.html',
-	styles: [``]
+	styles: [`
+		.prose h1 {
+			color: wheat;
+		}
+	`]
 })
 export class BlogPostComponent implements OnInit, OnDestroy {
 
