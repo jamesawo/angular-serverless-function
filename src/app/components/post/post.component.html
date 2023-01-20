@@ -6,7 +6,7 @@
 					[innerText]="post?.title">
 				</a>
 			</h1>
-			<h4 class="font-medium" [innerText]="post?.excerpt"></h4>
+			<h4 class="font-medium" [innerText]="post?.excerpt || ''"></h4>
 			<div
 				class="flex flex-col items-start justify-between w-full md:flex-row md:items-center dark:text-gray-400">
 				<div class="flex items-center md:space-x-2">
