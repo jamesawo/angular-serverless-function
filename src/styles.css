@@ -15,6 +15,7 @@ body.dark .prose h3,
 body.dark .prose h4,
 body.dark .prose blockquote>p,
 body.dark .prose p>strong,
+body.dark .prose p>a,
 body.dark .prose {
 	color: white;
 }
