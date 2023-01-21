@@ -15,7 +15,6 @@ import { BlogPost } from '../../lib/types.interface';
 export class BlogComponent implements OnInit {
 	public posts?: Observable<BlogPost[]>;
 
-
 	public constructor(
 		private postService: PostService,
 		private seoService: SeoService

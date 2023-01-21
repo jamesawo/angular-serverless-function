@@ -21,11 +21,10 @@ export class SeoService {
 		const pageTitle = `${data?.pageTitle ?? `Welcome to my Personal | Projects | Blog Website`}`;
 		const description = `${data?.pageDescription ??
 			`
-            Hi, my name is ${author} welcome to my personal space on the web.
-            I am a fullstack software engineer.
-            I'm passionate about building functional and performant products,
-            I like to learn new stuff and I get excited when
-            I work on big problems with amazing people.`
+				Hi, my name is ${author} welcome to my personal space on the web.
+				I am a fullstack software engineer.
+				I'm passionate about building functional and performant products,
+				I like to learn new stuff and I get excited when work on big problems with amazing people.`
 			} `;
 		const keywords = `${data?.pageKeywords ?? 'programming, fullstack engineering, java, typescript, blogging'}`;
 		const pageUrl = `${data?.pageUrl ?? 'https://jamesaworo.com/'}`;

@@ -1,4 +1,3 @@
-import { SeoData } from 'src/app/lib/types.interface';
 import { Component, OnInit } from '@angular/core';
 import { SeoService } from './../../services/seo/seo.service';
 
@@ -9,13 +8,9 @@ import { SeoService } from './../../services/seo/seo.service';
 })
 export class ProjectsComponent implements OnInit {
 
-	constructor(
-		private seoService: SeoService) { }
+	constructor(private seoService: SeoService) { }
 
 	ngOnInit(): void {
-		const data: SeoData = {
-			pageTitle: 'My Projects / Portfolio',
-		}
-		this.seoService.setSEO(data);
+		this.seoService.setSEO({ pageTitle: 'My Projects / Portfolio', });
 	}
 }

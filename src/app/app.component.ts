@@ -1,6 +1,6 @@
-import { ThemeService } from './services/theme/theme.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ThemeService } from './services/theme/theme.service';
 
 @Component({
 	selector: 'app-root',

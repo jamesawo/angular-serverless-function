@@ -1,4 +1,3 @@
-import { SeoData } from 'src/app/lib/types.interface';
 import { Component, OnInit } from '@angular/core';
 import { SeoService } from './../../services/seo/seo.service';
 

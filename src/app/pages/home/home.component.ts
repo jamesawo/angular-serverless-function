@@ -1,6 +1,6 @@
+import { Component, OnInit } from '@angular/core';
 import { SeoService } from './../../services/seo/seo.service';
 import { PostService } from './../../services/blog/post.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'app-home',
@@ -8,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-	constructor(private service: PostService,
-		private seoService: SeoService) { }
-
+	constructor(
+		private service: PostService,
+		private seoService: SeoService
+	) { }
 
 	ngOnInit(): void {
 		this.seoService.setSEO();
