@@ -1,8 +1,10 @@
+import { SeoData } from 'src/app/lib/types.interface';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { SeoService } from './../../../services/seo/seo.service';
 import { BlogPost } from './../../../lib/types.interface';
 import { PostService } from './../../../services/blog/post.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -19,9 +21,11 @@ export class BlogPostComponent implements OnInit, OnDestroy {
 	public post?: BlogPost;
 	public content?: any;
 	private sub: Subscription = new Subscription();
+
 	public constructor(
 		private route: ActivatedRoute,
 		private postService: PostService,
+		private seoService: SeoService
 	) { }
 
 	ngOnInit(): void {
@@ -30,7 +34,9 @@ export class BlogPostComponent implements OnInit, OnDestroy {
 
 		this.sub.add(
 			this.postService.posts$?.subscribe(posts => {
-				this.post = posts.find(post => post._id === postId);
+				const post = posts.find(post => post._id === postId);
+				this.post = post;
+				this.setSeo(post);
 			})
 		)
 
@@ -38,6 +44,17 @@ export class BlogPostComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy(): void {
 		this.sub.unsubscribe();
+	}
+
+	private setSeo(post?: BlogPost): void {
+		if (post) {
+			const seo: SeoData = {
+				pageTitle: `${post?.title}`,
+				pageDescription: `${post.excerpt}`,
+				pageKeywords: `${post.tags?.toString()}`
+			}
+			this.seoService.setSEO(seo);
+		}
 	}
 
 }

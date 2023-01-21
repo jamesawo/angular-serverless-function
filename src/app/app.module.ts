@@ -25,6 +25,7 @@ import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-l
 import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -42,7 +43,7 @@ import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 		DarkSwitchComponent,
 		ToggleSwitchComponent,
 		SkeletonLoaderComponent,
-		BlogPostComponent
+		BlogPostComponent,
 	],
 	imports: [
 		BrowserModule,

@@ -1,8 +1,10 @@
 import { Observable } from 'rxjs';
-import { PostService } from './../../services/blog/post.service';
 import { Component, OnInit } from '@angular/core';
+import { PostService } from './../../services/blog/post.service';
+import { SeoService } from './../../services/seo/seo.service';
 
 import { BlogPost } from '../../lib/types.interface';
+
 
 
 @Component({
@@ -16,9 +18,11 @@ export class BlogComponent implements OnInit {
 
 	public constructor(
 		private postService: PostService,
+		private seoService: SeoService
 	) { }
 
 	ngOnInit(): void {
+		this.seoService.setSEO({ pageTitle: 'Blog Posts' });
 		this.posts = this.postService.posts$;
 	}
 
