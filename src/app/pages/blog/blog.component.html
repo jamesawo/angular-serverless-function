@@ -10,7 +10,12 @@
 
 <section id="post" class="text-black dark:text-white">
 	<div class="mt-12">
-		<app-skeleton-loader *ngIf="!(posts | async)"></app-skeleton-loader>
-		<app-post [post]="item" *ngFor="let item of posts | async"></app-post>
+		<ng-container *ngIf="posts$ | async as posts; else loading">
+			<app-post [post]="item" *ngFor="let item of posts"></app-post>
+		</ng-container>
 	</div>
 </section>
+
+<ng-template #loading>
+	<app-skeleton-loader [pageEnum]="blogPage"></app-skeleton-loader>
+</ng-template>

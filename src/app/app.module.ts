@@ -25,7 +25,9 @@ import { DarkSwitchComponent } from './components/theme/dark-switch/dark-switch.
 import { ToggleSwitchComponent } from './components/theme/toggle-switch/toggle-switch.component';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
 import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
-
+import { BlogSkeletonComponent } from './components/skeleton-loader/blog-skeleton/blog-skeleton.component';
+import { ProjectsSkeletonComponent } from './components/skeleton-loader/projects-skeleton/projects-skeleton.component';
+import { BookmarksSkeletonComponent } from './components/skeleton-loader/bookmarks-skeleton/bookmarks-skeleton.component';
 
 
 @NgModule({
@@ -46,6 +48,9 @@ import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 		ToggleSwitchComponent,
 		SkeletonLoaderComponent,
 		BlogPostComponent,
+		BlogSkeletonComponent,
+		ProjectsSkeletonComponent,
+		BookmarksSkeletonComponent,
 	],
 	imports: [
 		BrowserModule,

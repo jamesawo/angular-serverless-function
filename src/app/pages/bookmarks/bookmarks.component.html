@@ -21,4 +21,10 @@
 	</div>
 </section>
 
-<app-bookmark></app-bookmark>
+<ng-container *ngIf="bookmarks$ | async as bookmarks; else loading">
+	<app-bookmark *ngFor="let bookmark of bookmarks"></app-bookmark>
+</ng-container>
+
+<ng-template #loading>
+	<app-skeleton-loader [pageEnum]="bookmarkPage"></app-skeleton-loader>
+</ng-template>

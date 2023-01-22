@@ -2,9 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { PostService } from './../../services/blog/post.service';
 import { SeoService } from './../../services/seo/seo.service';
-
-import { BlogPost } from '../../lib/types.interface';
-
+import { BlogPost, PageEnum } from '../../lib/types.interface';
 
 
 @Component({
@@ -13,7 +11,8 @@ import { BlogPost } from '../../lib/types.interface';
 	providers: []
 })
 export class BlogComponent implements OnInit {
-	public posts?: Observable<BlogPost[]>;
+	public posts$?: Observable<BlogPost[]>;
+	public blogPage = PageEnum.blog;
 
 	public constructor(
 		private postService: PostService,
@@ -22,7 +21,7 @@ export class BlogComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.seoService.setSEO({ pageTitle: 'Blog Posts' });
-		this.posts = this.postService.posts$;
+		this.posts$ = this.postService.posts$;
 	}
 
 }

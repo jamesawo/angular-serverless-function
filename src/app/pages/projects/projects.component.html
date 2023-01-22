@@ -17,8 +17,12 @@
 	</div>
 </section>
 
-<div class="mt-10">
-	<app-skeleton-loader *ngIf="!(projects | async)"></app-skeleton-loader>
-</div>
+<ng-container *ngIf="projects$ | async as projects; else loading">
+	<app-project [project]="project" *ngFor="let project of projects"></app-project>
+</ng-container>
 
-<app-project [project]="project" *ngFor="let project of projects | async"></app-project>
+<ng-template #loading>
+	<div class="mt-10">
+		<app-skeleton-loader [pageEnum]="page"></app-skeleton-loader>
+	</div>
+</ng-template>

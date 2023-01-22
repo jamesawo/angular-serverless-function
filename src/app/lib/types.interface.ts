@@ -34,3 +34,9 @@ export interface SeoData {
 	author?: string;
 	pageImageUrl?: string;
 }
+
+export enum PageEnum {
+	blog,
+	project,
+	bookmark
+}

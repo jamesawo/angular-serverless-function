@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { ProjectService } from './../../services/project/project.service';
 import { Component, OnInit } from '@angular/core';
 import { SeoService } from './../../services/seo/seo.service';
-import { Project } from '../../lib/types.interface';
+import { Project, PageEnum } from '../../lib/types.interface';
 
 
 @Component({
@@ -11,7 +11,8 @@ import { Project } from '../../lib/types.interface';
 })
 export class ProjectsComponent implements OnInit {
 
-	public projects?: Observable<Project[]>;
+	public projects$?: Observable<Project[]>;
+	public page = PageEnum.project;
 
 	constructor(
 		private seoService: SeoService,
@@ -20,7 +21,7 @@ export class ProjectsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.seoService.setSEO({ pageTitle: 'My Projects / Portfolio', });
-		this.projects = this.projectService.projects;
+		this.projects$ = this.projectService.projects;
 	}
 
 }
