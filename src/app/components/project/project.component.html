@@ -2,84 +2,70 @@
 	<div class="flex flex-col sm:flex-row bg-white dark:bg-neutral-600 shadow-lg rounded-lg overflow-hidden">
 		<div class="w-full p-10 flex flex-col gap-5">
 			<h1 class="text-gray-800 font-bold text-2xl">
-				<a class="text-black dark:text-white hover:text-pink-500"> HealthSuite </a>
+				<a [href]="project?.action?.link" target="_blank" class="text-black dark:text-white hover:text-pink-500"
+					[innerText]="project?.title"></a>
 			</h1>
 
 			<div class="flex flex-col gap-2 text-black dark:text-white">
-				<p class="mt-2 text-gray-800 text-sm">
-					<span class="text-black dark:text-white font-bold">Description: </span>
-				</p>
+				<div class="block" *ngIf="project?.description">
+					<p class="mt-2 text-gray-800 text-sm">
+						<span class="text-black dark:text-white font-bold">Description: </span>
+					</p>
 
-				<p class="block text-sm">
-					Healthsuite is a robust enterprise grade web based hospital management information system
-					that helps manage the different daily operation of small, medium and large hospitals.
-					<br><br>
-					Built with over 12 modules each containing 10+ sub modules with extensive reporting
-					features, healthsuite can be used in any hospital environment for daily operations.
-				</p>
+					<p class="block text-sm" [innerHTML]="project?.description">
+					</p>
+				</div>
 
-
-				<div class="block text-gray-600 text-sm mt-4">
+				<div class="block text-gray-600 text-sm mt-4" *ngIf="project?.features?.length">
 
 					<p class="mt-2 text-sm">
 						<span class="text-black dark:text-white  font-bold">Features: </span>
 					</p>
 					<ul class=" list-inside list-disc text-black dark:text-white ">
-						<li>Tracking financial transactions.</li>
-						<li>Managing fees payment.</li>
-						<li>Enhancing a seamless flow of transactions</li>
+						<li *ngFor="let feature of project?.features">{{feature}}</li>
 					</ul>
 
 				</div>
 
-				<div class="flex flex-col gap-2">
+				<div class="flex flex-col gap-2" *ngIf="project?.modules?.length">
 					<p class="mt-4 text-gray-800 text-sm">
 						<span class="text-black dark:text-white font-bold">Modules: </span>
 					</p>
 
 					<div class="flex flex-row flex-wrap gap-1">
-						<app-tag [text]="'Electronic medical records'"></app-tag>
-						<app-tag [text]="'Pharmacy outlets'"></app-tag>
-						<app-tag [text]="'Stock & inventory'"></app-tag>
-						<app-tag [text]="'Doctor clerking'"></app-tag>
+						<app-tag *ngFor="let module of project?.modules" [text]="module"></app-tag>
 					</div>
 				</div>
 			</div>
 
 
-			<div class="flex flex-col gap-2">
+			<div class="flex flex-col gap-2" *ngIf="project?.industries?.length">
 				<p class="mt-5 text-gray-800 text-sm">
 					<span class="text-black dark:text-white font-bold">Industry: </span>
 				</p>
 
 				<div class="flex flex-row flex-wrap gap-1">
-					<app-tag text="Healthcare"></app-tag>
+					<app-tag *ngFor="let industry of project?.industries" [text]="industry"></app-tag>
 				</div>
 
 			</div>
 
-			<div class="flex flex-col gap-2">
+			<div class="flex flex-col gap-2" *ngIf="project?.tools?.length">
 				<p class="mt-2 text-gray-800 text-sm">
 					<span class="text-black dark:text-white font-bold">Deveopment Tools: </span>
 				</p>
 				<div class="flex flex-col gap-1">
 					<div class="flex flex-row flex-wrap gap-1">
-						<app-tag text="Java"></app-tag>
-						<app-tag text="SpringBoot"></app-tag>
-						<app-tag text="Angular"></app-tag>
-						<app-tag text="Typescript"></app-tag>
-						<app-tag text="PostgresSQL"></app-tag>
-						<app-tag text="Jenkins"></app-tag>
-						<app-tag text="Jasper Reports"></app-tag>
+						<app-tag *ngFor="let tool of project?.tools" [text]="tool"></app-tag>
 					</div>
 				</div>
 
 			</div>
 
-			<div class="flex item-center justify-between mt-4">
-				<a href="#">
+			<div class="flex item-center justify-between mt-4" *ngIf="project?.action">
+				<a [href]="project?.action?.link" target="_blank">
 					<button class="px-3 py-2 bg-[#0093F7] text-white text-xs font-bold rounded  hover:bg-pink-500">
-						view demo
+						<span [innerText]="project?.action?.title"></span>
 					</button>
 				</a>
 			</div>

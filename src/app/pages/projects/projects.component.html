@@ -17,6 +17,8 @@
 	</div>
 </section>
 
-<app-project></app-project>
-<app-project></app-project>
-<app-project></app-project>
+<div class="mt-10">
+	<app-skeleton-loader *ngIf="!(projects | async)"></app-skeleton-loader>
+</div>
+
+<app-project [project]="project" *ngFor="let project of projects | async"></app-project>

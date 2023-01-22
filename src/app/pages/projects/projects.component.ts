@@ -1,5 +1,8 @@
+import { Observable } from 'rxjs';
+import { ProjectService } from './../../services/project/project.service';
 import { Component, OnInit } from '@angular/core';
 import { SeoService } from './../../services/seo/seo.service';
+import { Project } from '../../lib/types.interface';
 
 
 @Component({
@@ -8,9 +11,16 @@ import { SeoService } from './../../services/seo/seo.service';
 })
 export class ProjectsComponent implements OnInit {
 
-	constructor(private seoService: SeoService) { }
+	public projects?: Observable<Project[]>;
+
+	constructor(
+		private seoService: SeoService,
+		private projectService: ProjectService
+	) { }
 
 	ngOnInit(): void {
 		this.seoService.setSEO({ pageTitle: 'My Projects / Portfolio', });
+		this.projects = this.projectService.projects;
 	}
+
 }

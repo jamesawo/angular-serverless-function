@@ -1,3 +1,5 @@
+import { SeoService } from './services/seo/seo.service';
+import { ProjectService } from './services/project/project.service';
 import { PostService } from './services/blog/post.service';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -52,7 +54,7 @@ import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 		HttpClientModule,
 		MarkdownModule.forRoot(),
 	],
-	providers: [PostService],
+	providers: [PostService, ProjectService, SeoService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

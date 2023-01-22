@@ -12,6 +12,20 @@ export interface BlogPost {
 	views?: number;
 }
 
+export interface Project {
+	title: string;
+	description: string;
+	features: string[];
+	modules: string[];
+	industries: string[];
+	tools: string[];
+	imageUrl: string;
+	action?: {
+		title: string;
+		link: string;
+	}
+}
+
 export interface SeoData {
 	pageTitle: string;
 	pageDescription?: string;
