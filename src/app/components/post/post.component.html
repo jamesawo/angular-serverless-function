@@ -10,7 +10,7 @@
 			<div
 				class="flex flex-col items-start justify-between w-full md:flex-row md:items-center dark:text-gray-400">
 				<div class="flex items-center md:space-x-2">
-					<p class="text-sm"> {{post?.author}} • {{toDateString(post?.date)}}</p>
+					<p class="text-sm"> {{post?.author}} • {{post?.date | date}}</p>
 				</div>
 				<!-- <p class="flex-shrink-0 mt-3 text-sm md:mt-0">{{post?.read}} min read • {{post?.views}} views</p> -->
 			</div>

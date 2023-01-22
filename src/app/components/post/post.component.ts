@@ -10,9 +10,4 @@ export class PostComponent {
 	@Input()
 	post?: BlogPost;
 
-	public toDateString(arg?: string): string {
-		if (!arg) return '';
-
-		return new Date(arg!).toDateString();
-	}
 }

@@ -13,6 +13,7 @@ import { PostService } from './../../../services/blog/post.service';
 })
 export class BlogPostComponent implements OnInit, OnDestroy {
 
+
 	public post?: BlogPost;
 	public content?: any;
 	private sub: Subscription = new Subscription();
