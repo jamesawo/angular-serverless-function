@@ -22,9 +22,11 @@
 </section>
 
 <ng-container *ngIf="bookmarks$ | async as bookmarks; else loading">
-	<app-bookmark *ngFor="let bookmark of bookmarks"></app-bookmark>
+	<app-bookmark [bookmark]="bookmark" *ngFor="let bookmark of bookmarks"></app-bookmark>
 </ng-container>
 
 <ng-template #loading>
-	<app-skeleton-loader [pageEnum]="bookmarkPage"></app-skeleton-loader>
+	<div class="mt-20">
+		<app-skeleton-loader [pageEnum]="bookmarkPage"></app-skeleton-loader>
+	</div>
 </ng-template>

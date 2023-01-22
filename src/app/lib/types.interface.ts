@@ -26,6 +26,13 @@ export interface Project {
 	}
 }
 
+export interface Bookmark {
+	short: string;
+	url: string;
+	date: string;
+	tags?: string[];
+}
+
 export interface SeoData {
 	pageTitle: string;
 	pageDescription?: string;
