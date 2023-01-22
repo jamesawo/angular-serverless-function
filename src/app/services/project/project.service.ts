@@ -7,21 +7,16 @@ import { Injectable } from '@angular/core';
 	providedIn: 'root'
 })
 export class ProjectService {
-
 	public projects?: Observable<Project[]>
-	private count = 0;
 
 	constructor(private http: HttpClient) {
 		if (!this.projects) this.loadProjects();
-
 	}
 
 	private loadProjects(): void {
-		console.log('loading projects ' + this.count++);
 		const base = window.location.origin;
 		this.projects = this.http
 			.get<{ data: Project[] }>(`${base}/.netlify/functions/projects`)
-			.pipe(map(e => e.data))
-			;
+			.pipe(map(e => e.data));
 	}
 }
