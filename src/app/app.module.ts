@@ -1,3 +1,4 @@
+import { BookmarkService } from './services/bookmark/bookmark.service';
 import { SeoService } from './services/seo/seo.service';
 import { ProjectService } from './services/project/project.service';
 import { PostService } from './services/blog/post.service';
@@ -59,7 +60,7 @@ import { BookmarksSkeletonComponent } from './components/skeleton-loader/bookmar
 		HttpClientModule,
 		MarkdownModule.forRoot(),
 	],
-	providers: [PostService, ProjectService, SeoService],
+	providers: [PostService, ProjectService, SeoService, BookmarkService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
