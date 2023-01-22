@@ -2,8 +2,10 @@
 	<div class="flex flex-col sm:flex-row bg-white dark:bg-neutral-600 shadow-lg rounded-lg overflow-hidden">
 		<div class="w-full p-10 flex flex-col gap-5">
 			<h1 class="text-gray-800 font-bold text-2xl">
-				<a [href]="project?.action?.link" target="_blank" class="text-black dark:text-white hover:text-pink-500"
+				<a [href]="project?.action?.link" target="_blank"
+					class="text-black dark:text-white hover:text-pink-500 hover:underline dark:hover:text-pink-500 dark:hover:underline"
 					[innerText]="project?.title"></a>
+
 			</h1>
 
 			<div class="flex flex-col gap-2 text-black dark:text-white">
@@ -64,7 +66,7 @@
 
 			<div class="flex item-center justify-between mt-4" *ngIf="project?.action">
 				<a [href]="project?.action?.link" target="_blank">
-					<button class="px-3 py-2 bg-[#0093F7] text-white text-xs font-bold rounded  hover:bg-pink-500">
+					<button class="px-3 py-2 bg-pink-600 text-white text-xs font-bold rounded  hover:bg-pink-400">
 						<span [innerText]="project?.action?.title"></span>
 					</button>
 				</a>
