@@ -58,6 +58,7 @@ import { EditorLayoutComponent } from './components/editor/editor-layout/editor-
 		FormComponent,
 		NotFoundComponent,
 		EditorLayoutComponent,
+
 	],
 	imports: [
 		BrowserModule,
@@ -68,6 +69,6 @@ import { EditorLayoutComponent } from './components/editor/editor-layout/editor-
 		EditorModule
 	],
 	providers: [PostService, ProjectService, SeoService, BookmarkService],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
 })
 export class AppModule { }
