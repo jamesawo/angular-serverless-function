@@ -6,15 +6,24 @@ import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { EditorLayoutComponent } from './components/editor/editor-layout/editor-layout.component';
+
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
-
-	{ path: 'blog', component: BlogComponent, children: [] },
+	{ path: 'blog', component: BlogComponent },
 	{ path: 'blog/:postId', component: BlogPostComponent },
 
 	{ path: 'projects', component: ProjectsComponent },
-	{ path: 'bookmarks', component: BookmarksComponent }
+	{ path: 'bookmarks', component: BookmarksComponent },
+	{
+		path: 'editor',
+		loadChildren: () => import('./pages/editor/editor.module').then((c) => c.EditorModule),
+		component: EditorLayoutComponent
+	},
+	{ path: '**', component: NotFoundComponent },
+
 ];
 
 @NgModule({

@@ -1,3 +1,4 @@
+import { EditorModule } from './pages/editor/editor.module';
 import { BookmarkService } from './services/bookmark/bookmark.service';
 import { SeoService } from './services/seo/seo.service';
 import { ProjectService } from './services/project/project.service';
@@ -29,7 +30,9 @@ import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 import { BlogSkeletonComponent } from './components/skeleton-loader/blog-skeleton/blog-skeleton.component';
 import { ProjectsSkeletonComponent } from './components/skeleton-loader/projects-skeleton/projects-skeleton.component';
 import { BookmarksSkeletonComponent } from './components/skeleton-loader/bookmarks-skeleton/bookmarks-skeleton.component';
-
+import { FormComponent } from './components/form/form.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { EditorLayoutComponent } from './components/editor/editor-layout/editor-layout.component';
 
 @NgModule({
 	declarations: [
@@ -52,6 +55,9 @@ import { BookmarksSkeletonComponent } from './components/skeleton-loader/bookmar
 		BlogSkeletonComponent,
 		ProjectsSkeletonComponent,
 		BookmarksSkeletonComponent,
+		FormComponent,
+		NotFoundComponent,
+		EditorLayoutComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -59,6 +65,7 @@ import { BookmarksSkeletonComponent } from './components/skeleton-loader/bookmar
 		FormsModule,
 		HttpClientModule,
 		MarkdownModule.forRoot(),
+		EditorModule
 	],
 	providers: [PostService, ProjectService, SeoService, BookmarkService],
 	bootstrap: [AppComponent]

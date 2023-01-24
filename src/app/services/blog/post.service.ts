@@ -22,7 +22,6 @@ export class PostService {
 		const base = window.location.origin;
 		this.posts$ = this.http
 			.get<{ data: BlogPost[] }>(`${base}/.netlify/functions/posts`)
-			.pipe(map(x => x.data))
-			;
+			.pipe(map(x => x.data));
 	}
 }
