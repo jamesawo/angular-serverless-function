@@ -7,6 +7,8 @@ import { PostsComponent } from './posts/posts.component';
 import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EditorHeaderComponent } from '../../components/editor/editor-header/editor-header.component';
+import { TableComponent } from '../../components/table/table.component';
+
 
 @NgModule({
 	declarations: [
@@ -15,6 +17,7 @@ import { EditorHeaderComponent } from '../../components/editor/editor-header/edi
 		BookmarksComponent,
 		ProjectsComponent,
 		EditorHeaderComponent,
+		TableComponent
 	],
 	imports: [
 		CommonModule,
@@ -22,6 +25,7 @@ import { EditorHeaderComponent } from '../../components/editor/editor-header/edi
 	],
 	exports: [
 		EditorHeaderComponent,
+		TableComponent
 	]
 })
 export class EditorModule { }
