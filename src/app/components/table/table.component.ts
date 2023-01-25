@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Table } from './../../lib/types.interface';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styles: [
-  ]
+	selector: 'app-table',
+	templateUrl: './table.component.html',
+	styles: [
+	]
 })
 export class TableComponent {
-
+	@Input()
+	payload?: Table<any>;
 }

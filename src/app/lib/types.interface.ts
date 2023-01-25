@@ -47,3 +47,23 @@ export enum PageEnum {
 	project,
 	bookmark
 }
+
+export interface TableData<T> {
+	id: string,
+	title: string,
+	date: string,
+	obj?: T
+}
+
+type TableCol = {
+	title: string,
+}
+
+export interface Table<T> {
+	cols?: TableCol[],
+	data: TableData<T>[],
+	action?: {
+		remove: (id: string) => void,
+		edit: (id: string, data?: T) => void
+	}
+}
