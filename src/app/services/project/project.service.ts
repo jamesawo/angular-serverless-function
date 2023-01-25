@@ -7,15 +7,15 @@ import { Project } from './../../lib/types.interface';
 	providedIn: 'root'
 })
 export class ProjectService {
-	public projects?: Observable<Project[]>
+	public projects$?: Observable<Project[]>
 
 	constructor(private http: HttpClient) {
-		if (!this.projects) this.loadProjects();
+		if (!this.projects$) this.loadProjects();
 	}
 
 	private loadProjects(): void {
 		const base = window.location.origin;
-		this.projects = this.http
+		this.projects$ = this.http
 			.get<{ data: Project[] }>(`${base}/.netlify/functions/projects`)
 			.pipe(map(e => e.data));
 	}

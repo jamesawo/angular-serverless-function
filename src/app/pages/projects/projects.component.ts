@@ -21,7 +21,7 @@ export class ProjectsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.seoService.setSEO({ pageTitle: 'My Projects / Portfolio', });
-		this.projects$ = this.projectService.projects;
+		this.projects$ = this.projectService.projects$;
 	}
 
 }

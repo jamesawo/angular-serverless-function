@@ -13,6 +13,7 @@ export interface BlogPost {
 }
 
 export interface Project {
+	_id?: string;
 	title: string;
 	description: string;
 	features: string[];
@@ -51,7 +52,7 @@ export enum PageEnum {
 export interface TableData<T> {
 	id: string,
 	title: string,
-	date: string,
+	date?: string,
 	obj?: T
 }
 
