@@ -28,6 +28,7 @@ export interface Project {
 }
 
 export interface Bookmark {
+	_id?: string;
 	short: string;
 	url: string;
 	date: string;

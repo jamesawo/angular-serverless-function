@@ -15,10 +15,10 @@ export class ProjectsComponent implements OnInit {
 	public constructor(private service: ProjectService) { }
 
 	ngOnInit(): void {
-		this.setEditorPosts();
+		this.setPayload();
 	}
 
-	private async setEditorPosts() {
+	private async setPayload() {
 		const response = await firstValueFrom(this.service.projects$!);
 		response.forEach(project => this.payload.data.push(this.toTableData(project)))
 		this.payload.action = { onEdit: this.onEditProject, onRemove: this.onRemoveProject }
