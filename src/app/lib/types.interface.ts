@@ -63,7 +63,7 @@ export interface Table<T> {
 	cols?: TableCol[],
 	data: TableData<T>[],
 	action?: {
-		remove: (id: string) => void,
-		edit: (id: string, data?: T) => void
+		onRemove: (id: string) => void,
+		onEdit: (id: string, data?: T) => void
 	}
 }
