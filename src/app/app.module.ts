@@ -1,3 +1,4 @@
+import { ModalModule } from './pages/modal/modal.module';
 import { EditorModule } from './pages/editor/editor.module';
 import { BookmarkService } from './services/bookmark/bookmark.service';
 import { SeoService } from './services/seo/seo.service';
@@ -65,7 +66,8 @@ import { EditorLayoutComponent } from './components/editor/editor-layout/editor-
 		FormsModule,
 		HttpClientModule,
 		MarkdownModule.forRoot(),
-		EditorModule
+		EditorModule,
+		ModalModule
 	],
 	providers: [PostService, ProjectService, SeoService, BookmarkService],
 	bootstrap: [AppComponent],

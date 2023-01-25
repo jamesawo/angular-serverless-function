@@ -9,6 +9,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { EditorHeaderComponent } from '../../components/editor/editor-header/editor-header.component';
 import { TableComponent } from '../../components/table/table.component';
 import { ButtonComponent } from '../../components/button/button.component';
+import { ModalModule } from "../modal/modal.module";
 
 
 @NgModule({
@@ -21,14 +22,16 @@ import { ButtonComponent } from '../../components/button/button.component';
 		TableComponent,
 		ButtonComponent,
 	],
-	imports: [
-		CommonModule,
-		EditorRoutingModule
-	],
 	exports: [
 		EditorHeaderComponent,
 		TableComponent,
 		ButtonComponent,
+	],
+	providers: [],
+	imports: [
+		CommonModule,
+		EditorRoutingModule,
+		ModalModule
 	]
 })
 export class EditorModule { }
