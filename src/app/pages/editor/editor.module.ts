@@ -8,6 +8,7 @@ import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EditorHeaderComponent } from '../../components/editor/editor-header/editor-header.component';
 import { TableComponent } from '../../components/table/table.component';
+import { ButtonComponent } from '../../components/button/button.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { TableComponent } from '../../components/table/table.component';
 		BookmarksComponent,
 		ProjectsComponent,
 		EditorHeaderComponent,
-		TableComponent
+		TableComponent,
+		ButtonComponent,
 	],
 	imports: [
 		CommonModule,
@@ -25,7 +27,8 @@ import { TableComponent } from '../../components/table/table.component';
 	],
 	exports: [
 		EditorHeaderComponent,
-		TableComponent
+		TableComponent,
+		ButtonComponent,
 	]
 })
 export class EditorModule { }

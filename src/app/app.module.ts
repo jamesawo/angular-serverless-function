@@ -58,7 +58,6 @@ import { EditorLayoutComponent } from './components/editor/editor-layout/editor-
 		FormComponent,
 		NotFoundComponent,
 		EditorLayoutComponent,
-
 	],
 	imports: [
 		BrowserModule,
