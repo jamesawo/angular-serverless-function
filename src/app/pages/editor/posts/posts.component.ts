@@ -26,7 +26,7 @@ export class PostsComponent implements OnInit {
 
 	public onOpenModal = async (): Promise<void> => {
 		const { FormComponent } = await import('./../../../components/form/form.component');
-		await this.modalService.open(FormComponent, 'Create Post');
+		await this.modalService.open({ component: FormComponent, modalTitle: 'Create Post' });
 	}
 
 	private async setEditorPosts(): Promise<void> {

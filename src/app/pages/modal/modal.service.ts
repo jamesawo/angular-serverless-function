@@ -20,11 +20,11 @@ export class ModalService<T> {
 		this.componentRef = undefined;
 	}
 
-	public async open(component: Type<T>, title?: string): Promise<void> {
-
+	public async open(param: { component: Type<T>, modalTitle?: string }): Promise<void> {
 		if (this.componentRef) return
-		this.title = title;
-		this.resolveComponent(component);
+
+		this.title = param.modalTitle;
+		this.resolveComponent(param.component);
 		this.appendComponentToHtmlBody();
 	}
 

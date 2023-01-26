@@ -10,6 +10,7 @@ import { EditorHeaderComponent } from '../../components/editor/editor-header/edi
 import { TableComponent } from '../../components/table/table.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import { ModalModule } from "../modal/modal.module";
+import { FormComponent } from './posts/form/form.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ModalModule } from "../modal/modal.module";
 		EditorHeaderComponent,
 		TableComponent,
 		ButtonComponent,
+  FormComponent,
 	],
 	exports: [
 		EditorHeaderComponent,
