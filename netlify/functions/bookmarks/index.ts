@@ -1,5 +1,6 @@
 import { Handler } from '@netlify/functions';
 import { get } from '../../functions/bookmarks/get';
+import { post } from '../../functions/bookmarks/post';
 
 const handler: Handler = async (event, context) => {
 
@@ -11,6 +12,8 @@ const handler: Handler = async (event, context) => {
 				break;
 
 			case 'POST':
+				console.log('its a post request')
+				await post(event);
 				break;
 
 			case 'PUT':

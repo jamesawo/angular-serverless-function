@@ -22,6 +22,7 @@ export class BookmarkService {
 	}
 
 	public saveBookmark(bookmark: Bookmark): Observable<Bookmark> {
+		console.log('saving bookmark in bookmark service');
 		return this.http.post<Bookmark>(`${this.base}`, bookmark);
 	}
 }

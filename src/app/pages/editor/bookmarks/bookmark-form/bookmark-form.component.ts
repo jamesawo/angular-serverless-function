@@ -12,6 +12,7 @@ import { BookmarkService } from './../../../../services/bookmark/bookmark.servic
 export class BookmarkFormComponent implements OnInit {
 
 	public form: FormGroup = new FormGroup({});
+	public isLoading = false;
 	public constructor(private bookmarkService: BookmarkService, private fb: FormBuilder) { }
 
 	public isInvalidControl = (controlName: string): boolean => {
@@ -33,6 +34,7 @@ export class BookmarkFormComponent implements OnInit {
 	onSubmitForm() {
 		if (this.form.invalid) {
 			this.form.markAllAsTouched();
+			this.isLoading = false;
 			return;
 		}
 		const { date, short, url, tags } = this.form.value;
@@ -41,6 +43,8 @@ export class BookmarkFormComponent implements OnInit {
 		let bookmark: Bookmark = { short: bShorter, url, date, tags: bTags };
 		// save bookmarks
 		console.log(bookmark)
+		this.isLoading = true;
+		this.bookmarkService.saveBookmark(bookmark);
 
 	}
 

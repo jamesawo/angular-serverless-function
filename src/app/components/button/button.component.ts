@@ -15,5 +15,8 @@ export class ButtonComponent {
 	type = 'button'
 
 	@Input()
+	loading: boolean = false;
+
+	@Input()
 	action: () => void = () => { }
 }

@@ -7,7 +7,7 @@
 		<app-input controlName="date" type="date" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
 
 		<div class="relative flex w-full flex-wrap items-stretch mb-3">
-			<app-button text="Save" type="submit"></app-button>
+			<app-button [loading]="isLoading" text="Save" type="submit"></app-button>
 		</div>
 	</form>
 </app-modal>
