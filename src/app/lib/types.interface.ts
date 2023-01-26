@@ -69,3 +69,8 @@ export interface Table<T> {
 		onEdit: (id: string, data?: T) => void
 	}
 }
+
+export interface ClientResponse {
+	acknowledge: boolean;
+	_id: string;
+}

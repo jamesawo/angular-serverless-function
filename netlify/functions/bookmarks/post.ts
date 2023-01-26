@@ -2,8 +2,21 @@ import { HandlerEvent } from "@netlify/functions";
 import { MongoClient } from 'mongodb'
 
 const post = async (event: HandlerEvent) => {
-	console.log(event.httpMethod);
-	console.log('its a post reques there');
+	if (!event.body) throw new Error('Please provide a book to save');
+
+	const client = new MongoClient(process.env['MONGODB_URL']);
+
+	try {
+		const database = client.db(process.env['MONGODB_NAME']);
+		return await database.collection("bookmarks").insertOne(JSON.parse(event.body));
+
+	} catch (error) {
+		console.log(error);
+		throw new Error(error.message);
+	}
+	finally {
+		await client.close();
+	}
 }
 
 

@@ -1,4 +1,5 @@
-import { Bookmark } from './../../../../lib/types.interface';
+import { map } from 'rxjs';
+import { Bookmark, ClientResponse } from './../../../../lib/types.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookmarkService } from './../../../../services/bookmark/bookmark.service';
@@ -38,14 +39,27 @@ export class BookmarkFormComponent implements OnInit {
 			return;
 		}
 		const { date, short, url, tags } = this.form.value;
-		const bTags = tags.split(',') ?? [];
-		const bShorter = short.split(' ').join('-');
-		let bookmark: Bookmark = { short: bShorter, url, date, tags: bTags };
-		// save bookmarks
-		console.log(bookmark)
+		let bookmark: Bookmark = {
+			short: short.split(' ').join('-'),
+			url, date,
+			tags: tags.split(',') ?? []
+		};
+		// save bookmark
 		this.isLoading = true;
-		this.bookmarkService.saveBookmark(bookmark);
+		this.bookmarkService.saveBookmark(bookmark)
+			.pipe(map(x => x.data))
+			.subscribe({
+				next: (res) => this.onBookmarkSaved(res),
+				error: (err) => console.log(err)
+			});
 
+	}
+
+	private onBookmarkSaved(res: ClientResponse) {
+		this.isLoading = false;
+		if (res && res.acknowledge) {
+			//  show success notificaiton
+		}
 	}
 
 
