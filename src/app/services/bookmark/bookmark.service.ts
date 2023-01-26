@@ -9,15 +9,19 @@ import { Bookmark } from './../../lib/types.interface';
 })
 export class BookmarkService {
 	public bookmarks$?: Observable<Bookmark[]>
+	private base = window.location.origin + '/.netlify/functions/bookmarks';
 
 	constructor(private http: HttpClient) {
 		if (!this.bookmarks$) this.loadBookmarks();
 	}
 
 	private loadBookmarks(): void {
-		const base = window.location.origin;
 		this.bookmarks$ = this.http
-			.get<{ data: Bookmark[] }>(`${base}/.netlify/functions/bookmarks`)
+			.get<{ data: Bookmark[] }>(`${this.base}`)
 			.pipe(map(e => e.data));
+	}
+
+	public saveBookmark(bookmark: Bookmark): Observable<Bookmark> {
+		return this.http.post<Bookmark>(`${this.base}`, bookmark);
 	}
 }

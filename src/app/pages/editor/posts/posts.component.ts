@@ -17,17 +17,13 @@ export class PostsComponent implements OnInit {
 
 	public constructor(
 		private postService: PostService,
-		private modalService: ModalService<FormComponentType>
 	) { }
 
 	ngOnInit(): void {
 		this.setEditorPosts();
 	}
 
-	public onOpenModal = async (): Promise<void> => {
-		const { FormComponent } = await import('../posts/form/form.component');
-		await this.modalService.open({ component: FormComponent, modalTitle: 'Create Post' });
-	}
+	public gotoCreatePage = () => { console.log('implement create post here') }
 
 	private async setEditorPosts(): Promise<void> {
 		const response = await firstValueFrom(this.postService.posts$!);

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { BookmarkService } from './../../../services/bookmark/bookmark.service';
 import { Bookmark, Table, TableData } from './../../../lib/types.interface';
+import { BookmarkFormComponent as BookmarkFormComponentType } from './bookmark-form/bookmark-form.component';
+import { ModalService } from '../../modal/modal.service';
 
 @Component({
 	selector: 'app-bookmarks',
@@ -12,10 +14,18 @@ export class BookmarksComponent implements OnInit {
 
 	public payload: Table<Bookmark> = { cols: [{ title: 'Bookmark' }], data: [] };
 
-	public constructor(private service: BookmarkService) { }
+	public constructor(
+		private service: BookmarkService,
+		private modalService: ModalService<BookmarkFormComponentType>
+	) { }
 
 	ngOnInit(): void {
 		this.setBookmarks();
+	}
+
+	public onOpenModal = async (): Promise<void> => {
+		const { BookmarkFormComponent } = await import('../bookmarks/bookmark-form/bookmark-form.component');
+		await this.modalService.open({ component: BookmarkFormComponent, modalTitle: 'Create Bookmark' });
 	}
 
 	private async setBookmarks() {
