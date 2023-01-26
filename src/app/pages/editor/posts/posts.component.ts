@@ -1,8 +1,9 @@
-import { firstValueFrom } from 'rxjs';
-import { BlogPost, TableData } from './../../../lib/types.interface';
-import { PostService } from './../../../services/blog/post.service';
 import { Component, OnInit } from '@angular/core';
-import { Table } from 'src/app/lib/types.interface';
+import { firstValueFrom } from 'rxjs';
+import { BlogPost, TableData, Table } from './../../../lib/types.interface';
+import { PostService } from './../../../services/blog/post.service';
+import { ModalService } from './../../modal/modal.service';
+import { FormComponent as FormComponentType } from './../../../components/form/form.component';
 
 
 @Component({
@@ -14,13 +15,21 @@ export class PostsComponent implements OnInit {
 
 	public payload: Table<BlogPost> = { cols: [{ title: 'Post Title' }], data: [] };
 
-	public constructor(private postService: PostService) { }
+	public constructor(
+		private postService: PostService,
+		private modalService: ModalService<FormComponentType>
+	) { }
 
 	ngOnInit(): void {
 		this.setEditorPosts();
 	}
 
-	private async setEditorPosts() {
+	public onOpenModal = async (): Promise<void> => {
+		const { FormComponent } = await import('./../../../components/form/form.component');
+		await this.modalService.open(FormComponent, 'Create Post');
+	}
+
+	private async setEditorPosts(): Promise<void> {
 		const response = await firstValueFrom(this.postService.posts$!);
 		response.forEach(post => this.payload.data.push(this.toTableData(post)))
 		this.payload.action = { onEdit: this.onEditPost, onRemove: this.onRemovePost }

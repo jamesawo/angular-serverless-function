@@ -4,7 +4,7 @@ import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef
 	providedIn: 'root'
 })
 export class ModalService<T> {
-
+	public title?: string;
 	private componentRef?: ComponentRef<T>
 
 	constructor(
@@ -20,8 +20,10 @@ export class ModalService<T> {
 		this.componentRef = undefined;
 	}
 
-	public async open(component: Type<T>): Promise<void> {
+	public async open(component: Type<T>, title?: string): Promise<void> {
+
 		if (this.componentRef) return
+		this.title = title;
 		this.resolveComponent(component);
 		this.appendComponentToHtmlBody();
 	}

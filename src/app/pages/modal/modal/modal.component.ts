@@ -6,24 +6,25 @@ import { Component } from '@angular/core';
 	templateUrl: './modal.component.html',
 	styles: [
 		`
-		section {
+			section {
 			visibility: hidden;
 			opacity: 0;
-
-			&.open {
-				visibility: inherit;
-				opacity: 1;
-			}
-
 			transition: opacity 250ms ease-in;
+		}
+		section.open {
+			visibility: inherit;
+			opacity: 1;
 		}
 		`
 	]
 })
 export class ModalComponent<T> {
 	public display = true;
+	public title = '';
 
-	public constructor(private service: ModalService<T>) { }
+	public constructor(private service: ModalService<T>) {
+		this.title = service.title!;
+	}
 
 	public close = async () => {
 		this.display = false;

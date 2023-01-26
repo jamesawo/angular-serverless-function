@@ -11,5 +11,6 @@ export class ButtonComponent {
 	@Input()
 	text?: string;
 
-
+	@Input()
+	action?: () => void
 }
