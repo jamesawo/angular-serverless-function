@@ -5,7 +5,7 @@ import { SeoService } from './services/seo/seo.service';
 import { ProjectService } from './services/project/project.service';
 import { PostService } from './services/blog/post.service';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -64,10 +64,11 @@ import { EditorLayoutComponent } from './components/editor/editor-layout/editor-
 		BrowserModule,
 		AppRoutingModule,
 		FormsModule,
+		ReactiveFormsModule,
 		HttpClientModule,
 		MarkdownModule.forRoot(),
 		EditorModule,
-		ModalModule
+		ModalModule,
 	],
 	providers: [PostService, ProjectService, SeoService, BookmarkService],
 	bootstrap: [AppComponent],

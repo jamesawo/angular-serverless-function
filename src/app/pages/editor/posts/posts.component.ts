@@ -3,7 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { BlogPost, TableData, Table } from './../../../lib/types.interface';
 import { PostService } from './../../../services/blog/post.service';
 import { ModalService } from './../../modal/modal.service';
-import { FormComponent as FormComponentType } from './../../../components/form/form.component';
+import { FormComponent as FormComponentType } from '../posts/form/form.component';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class PostsComponent implements OnInit {
 	}
 
 	public onOpenModal = async (): Promise<void> => {
-		const { FormComponent } = await import('./../../../components/form/form.component');
+		const { FormComponent } = await import('../posts/form/form.component');
 		await this.modalService.open({ component: FormComponent, modalTitle: 'Create Post' });
 	}
 
@@ -36,7 +36,7 @@ export class PostsComponent implements OnInit {
 	}
 
 	private toTableData(post: BlogPost): TableData<BlogPost> {
-		return { id: post._id!, title: post.title, date: post.date, };
+		return { id: post._id!, title: post.title, date: new Date(post.date).toDateString(), };
 	}
 
 	private onEditPost = (id: string, data?: BlogPost): void => {

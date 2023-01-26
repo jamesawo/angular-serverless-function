@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,6 +14,7 @@ import { ModalModule } from "../modal/modal.module";
 import { FormComponent } from './posts/form/form.component';
 
 
+
 @NgModule({
 	declarations: [
 		HomeComponent,
@@ -22,7 +24,7 @@ import { FormComponent } from './posts/form/form.component';
 		EditorHeaderComponent,
 		TableComponent,
 		ButtonComponent,
-  FormComponent,
+		FormComponent,
 	],
 	exports: [
 		EditorHeaderComponent,
@@ -32,8 +34,10 @@ import { FormComponent } from './posts/form/form.component';
 	providers: [],
 	imports: [
 		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
 		EditorRoutingModule,
-		ModalModule
+		ModalModule,
 	]
 })
 export class EditorModule { }
