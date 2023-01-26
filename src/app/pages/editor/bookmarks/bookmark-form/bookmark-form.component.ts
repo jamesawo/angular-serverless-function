@@ -59,9 +59,6 @@ export class BookmarkFormComponent implements OnInit {
 	}
 
 	private onBookmarkSaved(res: ClientResponse) {
-		console.log(res
-		);
-
 		this.isLoading = false;
 
 		if (res && res.acknowledged) {
