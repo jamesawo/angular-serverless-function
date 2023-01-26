@@ -14,13 +14,16 @@ export class BookmarkFormComponent implements OnInit {
 
 	public form: FormGroup = new FormGroup({});
 	public isLoading = false;
-	public constructor(private bookmarkService: BookmarkService, private fb: FormBuilder) { }
+
+	public constructor(
+		private bookmarkService: BookmarkService,
+		private fb: FormBuilder,
+	) { }
 
 	public isInvalidControl = (controlName: string): boolean => {
 		const control = this.form.controls[controlName];
 		return control.touched == true && control.status === 'INVALID';
 	}
-
 
 	ngOnInit(): void {
 		this.form = this.fb.group({
@@ -56,8 +59,12 @@ export class BookmarkFormComponent implements OnInit {
 	}
 
 	private onBookmarkSaved(res: ClientResponse) {
+		console.log(res
+		);
+
 		this.isLoading = false;
-		if (res && res.acknowledge) {
+
+		if (res && res.acknowledged) {
 			//  show success notificaiton
 		}
 	}

@@ -71,6 +71,6 @@ export interface Table<T> {
 }
 
 export interface ClientResponse {
-	acknowledge: boolean;
-	_id: string;
+	acknowledged: boolean;
+	insertedId: string;
 }
