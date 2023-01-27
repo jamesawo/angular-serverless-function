@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { Bookmark, Table, TableData, ToastType } from './../../../lib/types.interface';
+import { Bookmark, Table, TableData } from './../../../lib/types.interface';
 import { ModalService } from '../../modal/modal.service';
 import { BookmarkService } from './../../../services/bookmark/bookmark.service';
 import { BookmarkFormComponent as BookmarkFormComponentType } from './bookmark-form/bookmark-form.component';
@@ -29,13 +29,13 @@ export class BookmarksComponent implements OnInit {
 	}
 
 	private async setBookmarks() {
-		const response = await firstValueFrom(this.service.bookmarks$!);
-		response.forEach(bm => this.payload.data.push(this.toTableData(bm)))
+		const bookmarks = await firstValueFrom(this.service.bookmarks$!);
+		bookmarks.forEach(bookmark => this.payload.data.push(this.toTableData(bookmark)))
 		this.payload.action = { onEdit: this.onEditProject, onRemove: this.onRemoveProject }
 	}
 
-	private toTableData(bm: Bookmark): TableData<Bookmark> {
-		return { id: bm._id!, title: bm.short || bm.url, };
+	private toTableData(bookmark: Bookmark): TableData<Bookmark> {
+		return { id: bookmark._id!, title: bookmark.short || bookmark.url, };
 	}
 
 	private onEditProject = (id: string, data?: Bookmark): void => {
