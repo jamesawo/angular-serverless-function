@@ -50,8 +50,8 @@ export class BookmarksComponent implements OnInit {
 
 	private onRemoveProject = async (id: string): Promise<void> => {
 		const result: boolean = confirm('Are you sure?');
-		if (result) {
-			// remove bookmark
+		if (result && id) {
+			this.service.removeBookmark(id).subscribe()
 		}
 	}
 

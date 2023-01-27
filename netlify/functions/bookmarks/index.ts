@@ -1,4 +1,5 @@
 import { Handler } from '@netlify/functions';
+import { remove } from './delete';
 import { get } from './get';
 import { post } from './post';
 import { put } from './put';
@@ -20,6 +21,7 @@ const handler: Handler = async (event, context) => {
 				break;
 
 			case 'DELETE':
+				body = await remove(event.queryStringParameters.bookmarkId);
 				break;
 
 			default:

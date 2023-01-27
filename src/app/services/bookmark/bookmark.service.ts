@@ -29,6 +29,10 @@ export class BookmarkService {
 		}
 	}
 
+	public removeBookmark(id: string) {
+		return this.http.delete<{ data: ClientResponse }>(`${this.base}?bookmarkId=${id}`);
+	}
+
 	private createBookmark(bookmark: Bookmark) {
 		return this.http.post<{ data: ClientResponse }>(`${this.base}`, bookmark);
 	}
@@ -36,4 +40,5 @@ export class BookmarkService {
 	private updateBookmark(bookmark: Bookmark) {
 		return this.http.put<{ data: ClientResponse }>(`${this.base}`, bookmark);
 	}
+
 }
