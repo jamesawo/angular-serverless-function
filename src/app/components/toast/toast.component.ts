@@ -60,6 +60,4 @@ export class ToastComponent implements OnInit {
 	public close() {
 		this.toastService.close();
 	}
-
-
 }

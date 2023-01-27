@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
-import { Bookmark, ClientResponse } from './../../../../lib/types.interface';
+import { Bookmark, ClientResponse, ToastType } from './../../../../lib/types.interface';
 import { BookmarkService } from './../../../../services/bookmark/bookmark.service';
 import { ToastService } from '../../../../services/toast/toast.service';
 
@@ -42,6 +42,7 @@ export class BookmarkFormComponent implements OnInit {
 			this.isLoading = false;
 			return;
 		}
+
 		const { date, short, url, tags } = this.form.value;
 		let bookmark: Bookmark = {
 			short: short.split(' ').join('-'),
@@ -54,16 +55,29 @@ export class BookmarkFormComponent implements OnInit {
 			.pipe(map(x => x.data))
 			.subscribe({
 				next: (res) => this.onBookmarkSaved(res),
-				error: (err) => console.log(err)
+				error: (err) => this.onBookmarkFailed(err)
 			});
 	}
 
 	private onBookmarkSaved(res: ClientResponse) {
 		this.isLoading = false;
-
 		if (res && res.acknowledged) {
-			//  show success notificaiton
+			this.toastService.show({
+				title: 'Success',
+				message: 'Bookmark Saved Successfully',
+				type: ToastType.success
+			})
 		}
+	}
+
+	private onBookmarkFailed(err: any): void {
+
+		this.toastService.show({
+			title: 'Failed',
+			message: err.message ?? 'Bookmark Failed To Save.',
+			type: ToastType.success
+		})
+
 	}
 
 

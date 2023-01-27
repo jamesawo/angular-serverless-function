@@ -31,15 +31,12 @@ export class ToastService {
 			type: args.type ?? ToastType.info,
 			message: args.message ?? ''
 		});
-		this.autoClose();
+		// can use this.options to decide autoclose
+		setTimeout(() => this.close(), 5000)
 	}
 
 	public close(): void {
 		this.listen.next({ isOpen: false })
-	}
-
-	private autoClose(): void {
-		setTimeout(() => this.close(), 5000)
 	}
 
 }
