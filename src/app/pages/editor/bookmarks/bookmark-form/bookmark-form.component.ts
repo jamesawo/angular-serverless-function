@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
 import { Bookmark, ClientResponse, ToastType } from './../../../../lib/types.interface';
@@ -11,6 +11,9 @@ import { ToastService } from '../../../../services/toast/toast.service';
 	styles: []
 })
 export class BookmarkFormComponent implements OnInit {
+
+	@Input()
+	default?: Bookmark;
 
 	public form: FormGroup = new FormGroup({});
 	public isLoading = false;
@@ -27,16 +30,16 @@ export class BookmarkFormComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		const val = this.default;
 		this.form = this.fb.group({
-			date: new FormControl(new Date().toISOString().slice(0, 10),
-				[Validators.required]),
-			tags: new FormControl('', [Validators.required]),
-			short: new FormControl('', [Validators.required]),
-			url: new FormControl('', [Validators.required]),
+			tags: new FormControl(val?.tags?.toString(), [Validators.required]),
+			short: new FormControl(val?.short, [Validators.required]),
+			url: new FormControl(val?.url, [Validators.required]),
+			date: new FormControl(this.parseDate(val?.date), [Validators.required]),
 		})
 	}
 
-	onSubmitForm() {
+	public onSubmitForm() {
 		if (this.form.invalid) {
 			this.form.markAllAsTouched();
 			this.isLoading = false;
@@ -44,11 +47,15 @@ export class BookmarkFormComponent implements OnInit {
 		}
 
 		const { date, short, url, tags } = this.form.value;
+		const splitTags = tags.split(',') ?? []
+		const splitShortAndJoin = short.split(' ').join('-');
+
 		let bookmark: Bookmark = {
-			short: short.split(' ').join('-'),
 			url, date,
-			tags: tags.split(',') ?? []
+			tags: splitTags,
+			short: splitShortAndJoin,
 		};
+
 		// save bookmark
 		this.isLoading = true;
 		this.bookmarkService.saveBookmark(bookmark)
@@ -71,14 +78,18 @@ export class BookmarkFormComponent implements OnInit {
 	}
 
 	private onBookmarkFailed(err: any): void {
-
 		this.toastService.show({
 			title: 'Failed',
 			message: err.message ?? 'Bookmark Failed To Save.',
 			type: ToastType.success
 		})
-
 	}
 
+	private parseDate(value?: string) {
+		if (!value) return new Date().toISOString().slice(0, 10);
+
+		const parse = Date.parse(value);
+		return new Date(parse).toISOString().slice(0, 10);
+	}
 
 }

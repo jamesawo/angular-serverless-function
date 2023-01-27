@@ -1,9 +1,13 @@
 import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Injector, Type } from '@angular/core';
 
+export type ComponentInput<U> = {
+	inputTitle: string, inputValue: U
+}
+
 @Injectable({
 	providedIn: 'root'
 })
-export class ModalService<T> {
+export class ModalService<T, U = void> {
 	public title?: string;
 	private componentRef?: ComponentRef<T>
 
@@ -20,20 +24,25 @@ export class ModalService<T> {
 		this.componentRef = undefined;
 	}
 
-	public async open(param: { component: Type<T>, modalTitle?: string }): Promise<void> {
+	public async open(
+		param: { component: Type<T>, modalTitle?: string },
+		input?: ComponentInput<U>
+	): Promise<void> {
 		if (this.componentRef) return
 
 		this.title = param.modalTitle;
-		this.resolveComponent(param.component);
+		this.resolveComponent(param.component, input);
 		this.appendComponentToHtmlBody();
 	}
 
-	private resolveComponent(component: Type<T>): void {
+	private resolveComponent(component: Type<T>, input?: ComponentInput<U>): void {
+		// use componentFactoryResolver to create component
 		this.componentRef = this.componentFactoryResolver
-			.resolveComponentFactory<T>(component)
-			.create(this.injector);
-
+			.resolveComponentFactory<T>(component).create(this.injector);
 		this.appRef.attachView(this.componentRef.hostView);
+
+		// if input (default value we want to pass to component), set component input value
+		if (input) this.componentRef.setInput('default', input?.inputValue);
 	}
 
 	private appendComponentToHtmlBody(): void {

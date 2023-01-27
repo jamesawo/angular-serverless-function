@@ -12,11 +12,11 @@ import { BookmarkFormComponent, BookmarkFormComponent as BookmarkFormComponentTy
 })
 export class BookmarksComponent implements OnInit {
 
-	public payload: Table<Bookmark> = { cols: [{ title: 'Bookmark' }], data: [] };
+	public bookmarkTable: Table<Bookmark> = { cols: [{ title: 'Bookmark' }], data: [] };
 
 	public constructor(
 		private service: BookmarkService,
-		private modalService: ModalService<BookmarkFormComponentType>
+		private modalService: ModalService<BookmarkFormComponent, Bookmark>
 	) { }
 
 	ngOnInit(): void {
@@ -25,25 +25,34 @@ export class BookmarksComponent implements OnInit {
 
 	public onOpenModal = async (): Promise<void> => {
 		//const { BookmarkFormComponent } = await import('../bookmarks/bookmark-form/bookmark-form.component');
-		await this.modalService.open({ component: BookmarkFormComponent, modalTitle: 'Create Bookmark' });
+		await this.modalService.open({
+			component: BookmarkFormComponent,
+			modalTitle: 'Create Bookmark'
+		});
 	}
 
 	private async setBookmarks() {
 		const bookmarks = await firstValueFrom(this.service.bookmarks$!);
-		bookmarks.forEach(bookmark => this.payload.data.push(this.toTableData(bookmark)))
-		this.payload.action = { onEdit: this.onEditProject, onRemove: this.onRemoveProject }
+		bookmarks.forEach(bookmark => this.bookmarkTable.data.push(this.toTableData(bookmark)))
+		this.bookmarkTable.action = { onEdit: this.onEditProject, onRemove: this.onRemoveProject }
 	}
 
 	private toTableData(bookmark: Bookmark): TableData<Bookmark> {
-		return { id: bookmark._id!, title: bookmark.short || bookmark.url, };
+		return { id: bookmark._id!, title: bookmark.short || bookmark.url, obj: bookmark };
 	}
 
-	private onEditProject = (id: string, data?: Bookmark): void => {
-		console.log('editing bookmark with id: ', id);
+	private onEditProject = async (id: string, data?: Bookmark): Promise<void> => {
+		const found = this.bookmarkTable.data.find(tableData => tableData.id === id);
+		const param = { component: BookmarkFormComponent, modalTitle: 'Create Bookmark' };
+		const defaultValue = { inputTitle: 'default', inputValue: found?.obj! };
+		await this.modalService.open(param, defaultValue);
 	}
 
-	private onRemoveProject = (id: string): void => {
-		console.log('removing bookmark with id: ', id);
+	private onRemoveProject = async (id: string): Promise<void> => {
+		const result: boolean = confirm('Are you sure?');
+		if (result) {
+			// remove bookmark
+		}
 	}
 
 }
