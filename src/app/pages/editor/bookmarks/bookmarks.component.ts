@@ -3,7 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { Bookmark, Table, TableData } from './../../../lib/types.interface';
 import { ModalService } from '../../modal/modal.service';
 import { BookmarkService } from './../../../services/bookmark/bookmark.service';
-import { BookmarkFormComponent as BookmarkFormComponentType } from './bookmark-form/bookmark-form.component';
+import { BookmarkFormComponent, BookmarkFormComponent as BookmarkFormComponentType } from './bookmark-form/bookmark-form.component';
 
 @Component({
 	selector: 'app-bookmarks',
@@ -24,7 +24,7 @@ export class BookmarksComponent implements OnInit {
 	}
 
 	public onOpenModal = async (): Promise<void> => {
-		const { BookmarkFormComponent } = await import('../bookmarks/bookmark-form/bookmark-form.component');
+		//const { BookmarkFormComponent } = await import('../bookmarks/bookmark-form/bookmark-form.component');
 		await this.modalService.open({ component: BookmarkFormComponent, modalTitle: 'Create Bookmark' });
 	}
 

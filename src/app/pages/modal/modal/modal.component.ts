@@ -30,6 +30,6 @@ export class ModalComponent<T> {
 		this.display = false;
 		setTimeout(async () => {
 			await this.service.close()
-		}, 3000)
+		}, 1000)
 	}
 }
