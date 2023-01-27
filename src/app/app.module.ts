@@ -1,22 +1,25 @@
-import { ModalModule } from './pages/modal/modal.module';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MarkdownModule } from 'ngx-markdown';
+
+import { AppRoutingModule } from './app-routing.module';
 import { EditorModule } from './pages/editor/editor.module';
+import { ModalModule } from './pages/modal/modal.module';
 import { BookmarkService } from './services/bookmark/bookmark.service';
 import { SeoService } from './services/seo/seo.service';
 import { ProjectService } from './services/project/project.service';
 import { PostService } from './services/blog/post.service';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { ToastService } from './services/toast/toast.service';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { MarkdownModule } from 'ngx-markdown';
-import { HttpClientModule } from '@angular/common/http';
 import { BlogComponent } from './pages/blog/blog.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { BookmarksComponent } from './pages/bookmarks/bookmarks.component';
 import { HomeComponent } from './pages/home/home.component';
+import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PostComponent } from './components/post/post.component';
@@ -27,7 +30,6 @@ import { LightSwitchComponent } from './components/theme/light-switch/light-swit
 import { DarkSwitchComponent } from './components/theme/dark-switch/dark-switch.component';
 import { ToggleSwitchComponent } from './components/theme/toggle-switch/toggle-switch.component';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
-import { BlogPostComponent } from './pages/blog/blog-post/blog-post.component';
 import { BlogSkeletonComponent } from './components/skeleton-loader/blog-skeleton/blog-skeleton.component';
 import { ProjectsSkeletonComponent } from './components/skeleton-loader/projects-skeleton/projects-skeleton.component';
 import { BookmarksSkeletonComponent } from './components/skeleton-loader/bookmarks-skeleton/bookmarks-skeleton.component';
@@ -60,11 +62,11 @@ import { ToastComponent } from './components/toast/toast.component';
 		FormComponent,
 		NotFoundComponent,
 		EditorLayoutComponent,
-  ToastComponent,
-
+		ToastComponent,
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
@@ -73,7 +75,13 @@ import { ToastComponent } from './components/toast/toast.component';
 		EditorModule,
 		ModalModule,
 	],
-	providers: [PostService, ProjectService, SeoService, BookmarkService],
+	providers: [
+		PostService,
+		ProjectService,
+		SeoService,
+		BookmarkService,
+		ToastService
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule { }

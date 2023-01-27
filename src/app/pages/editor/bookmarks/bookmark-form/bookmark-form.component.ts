@@ -1,14 +1,14 @@
-import { map } from 'rxjs';
-import { Bookmark, ClientResponse } from './../../../../lib/types.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { map } from 'rxjs';
+import { Bookmark, ClientResponse } from './../../../../lib/types.interface';
 import { BookmarkService } from './../../../../services/bookmark/bookmark.service';
+import { ToastService } from '../../../../services/toast/toast.service';
 
 @Component({
 	selector: 'app-bookmark-form',
 	templateUrl: './bookmark-form.component.html',
-	styles: [
-	]
+	styles: []
 })
 export class BookmarkFormComponent implements OnInit {
 
@@ -18,6 +18,7 @@ export class BookmarkFormComponent implements OnInit {
 	public constructor(
 		private bookmarkService: BookmarkService,
 		private fb: FormBuilder,
+		private toastService: ToastService
 	) { }
 
 	public isInvalidControl = (controlName: string): boolean => {
@@ -55,7 +56,6 @@ export class BookmarkFormComponent implements OnInit {
 				next: (res) => this.onBookmarkSaved(res),
 				error: (err) => console.log(err)
 			});
-
 	}
 
 	private onBookmarkSaved(res: ClientResponse) {

@@ -50,6 +50,13 @@ export enum PageEnum {
 	bookmark
 }
 
+export enum ToastType {
+	warning,
+	success,
+	info,
+	error
+}
+
 export interface TableData<T> {
 	id: string,
 	title: string,

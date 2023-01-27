@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { BookmarkService } from './../../../services/bookmark/bookmark.service';
-import { Bookmark, Table, TableData } from './../../../lib/types.interface';
-import { BookmarkFormComponent as BookmarkFormComponentType } from './bookmark-form/bookmark-form.component';
+import { Bookmark, Table, TableData, ToastType } from './../../../lib/types.interface';
 import { ModalService } from '../../modal/modal.service';
+import { BookmarkService } from './../../../services/bookmark/bookmark.service';
+import { BookmarkFormComponent as BookmarkFormComponentType } from './bookmark-form/bookmark-form.component';
 
 @Component({
 	selector: 'app-bookmarks',
