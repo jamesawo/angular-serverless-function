@@ -34,6 +34,7 @@ import { BookmarksSkeletonComponent } from './components/skeleton-loader/bookmar
 import { FormComponent } from './components/form/form.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { EditorLayoutComponent } from './components/editor/editor-layout/editor-layout.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
 	declarations: [
@@ -59,6 +60,7 @@ import { EditorLayoutComponent } from './components/editor/editor-layout/editor-
 		FormComponent,
 		NotFoundComponent,
 		EditorLayoutComponent,
+  ToastComponent,
 
 	],
 	imports: [
