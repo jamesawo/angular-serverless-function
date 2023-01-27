@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Bookmark, ClientResponse } from './../../lib/types.interface';
 
 
@@ -21,7 +21,19 @@ export class BookmarkService {
 			.pipe(map(e => e.data));
 	}
 
-	public saveBookmark(bookmark: Bookmark) {
+	public saveBookmark(bookmark: Bookmark, action: 'update' | 'create') {
+		if (action == 'create') {
+			return this.createBookmark(bookmark);
+		} else {
+			return this.updateBookmark(bookmark);
+		}
+	}
+
+	private createBookmark(bookmark: Bookmark) {
 		return this.http.post<{ data: ClientResponse }>(`${this.base}`, bookmark);
+	}
+
+	private updateBookmark(bookmark: Bookmark) {
+		return this.http.put<{ data: ClientResponse }>(`${this.base}`, bookmark);
 	}
 }

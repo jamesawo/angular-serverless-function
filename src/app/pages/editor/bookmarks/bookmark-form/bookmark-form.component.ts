@@ -58,7 +58,8 @@ export class BookmarkFormComponent implements OnInit {
 
 		// save bookmark
 		this.isLoading = true;
-		this.bookmarkService.saveBookmark(bookmark)
+		const action = this.default?._id ? 'update' : 'create';
+		this.bookmarkService.saveBookmark(bookmark, action)
 			.pipe(map(x => x.data))
 			.subscribe({
 				next: (res) => this.onBookmarkSaved(res),

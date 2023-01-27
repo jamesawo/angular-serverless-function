@@ -1,6 +1,7 @@
 import { Handler } from '@netlify/functions';
-import { get } from '../../functions/bookmarks/get';
-import { post } from '../../functions/bookmarks/post';
+import { get } from './get';
+import { post } from './post';
+import { put } from './put';
 
 const handler: Handler = async (event, context) => {
 	let body;
@@ -15,6 +16,7 @@ const handler: Handler = async (event, context) => {
 				break;
 
 			case 'PUT':
+				body = await put(event);
 				break;
 
 			case 'DELETE':
