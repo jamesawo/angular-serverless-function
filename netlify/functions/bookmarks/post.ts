@@ -19,5 +19,4 @@ const post = async (event: HandlerEvent) => {
 	}
 }
 
-
 export { post };

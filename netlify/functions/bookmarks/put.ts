@@ -30,5 +30,4 @@ const put = async (event: HandlerEvent) => {
 	}
 }
 
-
 export { put };

@@ -1,8 +1,7 @@
 import { HandlerEvent } from '@netlify/functions';
 
-
 const create = (event: HandlerEvent) => {
-	console.log('from create function');
+	return;
 }
 
 export { create };

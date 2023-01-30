@@ -2,7 +2,6 @@ import { Handler } from '@netlify/functions';
 import { get } from '../../functions/projects/get';
 
 const handler: Handler = async (event, context) => {
-
 	let body;
 	try {
 		switch (event.httpMethod) {

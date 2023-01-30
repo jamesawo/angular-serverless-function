@@ -23,7 +23,6 @@ const getAll = async (event: HandlerEvent) => {
 
 const getOne = async (event: HandlerEvent) => {
 	const id = event.queryStringParameters.id;
-	console.log('get one bookmark with id: ', id);
 	return;
 }
 
