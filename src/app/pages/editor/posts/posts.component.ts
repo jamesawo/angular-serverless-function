@@ -3,7 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { BlogPost, TableData, Table } from './../../../lib/types.interface';
 import { PostService } from './../../../services/blog/post.service';
 import { ModalService } from './../../modal/modal.service';
-import { FormComponent as FormComponentType } from '../posts/form/form.component';
+import { PostFormComponent as FormComponentType, PostFormComponent } from './form/post-form.component';
 
 
 @Component({
@@ -17,13 +17,19 @@ export class PostsComponent implements OnInit {
 
 	public constructor(
 		private postService: PostService,
+		private modalService: ModalService<PostFormComponent, BlogPost>,
 	) { }
 
 	ngOnInit(): void {
 		this.setEditorPosts();
 	}
 
-	public gotoCreatePage = () => { console.log('implement create post here') }
+	public onOpenModal = async (): Promise<void> => {
+		await this.modalService.open({
+			component: PostFormComponent,
+			modalTitle: 'Create Post'
+		});
+	}
 
 	private async setEditorPosts(): Promise<void> {
 		const response = await firstValueFrom(this.postService.posts$!);

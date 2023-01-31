@@ -11,7 +11,7 @@ import { EditorHeaderComponent } from '../../components/editor/editor-header/edi
 import { TableComponent } from '../../components/table/table.component';
 import { ButtonComponent } from '../../components/button/button.component';
 import { ModalModule } from "../modal/modal.module";
-import { FormComponent } from './posts/form/form.component';
+import { PostFormComponent } from './posts/form/post-form.component';
 import { BookmarkFormComponent } from './bookmarks/bookmark-form/bookmark-form.component';
 import { InputComponent } from '../../components/input/input.component';
 
@@ -25,7 +25,7 @@ import { InputComponent } from '../../components/input/input.component';
 		EditorHeaderComponent,
 		TableComponent,
 		ButtonComponent,
-		FormComponent,
+		PostFormComponent,
 		BookmarkFormComponent,
 		InputComponent,
 	],

@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { Bookmark, ClientResponse, ToastType } from './../../../../lib/types.interface';
 import { BookmarkService } from './../../../../services/bookmark/bookmark.service';
 import { ToastService } from '../../../../services/toast/toast.service';
+import { SharedService } from './../../../../services/shared/shared.service';
 
 @Component({
 	selector: 'app-bookmark-form',
@@ -21,12 +22,12 @@ export class BookmarkFormComponent implements OnInit {
 	public constructor(
 		private bookmarkService: BookmarkService,
 		private fb: FormBuilder,
-		private toastService: ToastService
+		private toastService: ToastService,
+		private sharedService: SharedService
 	) { }
 
 	public isInvalidControl = (controlName: string): boolean => {
-		const control = this.form.controls[controlName];
-		return control.touched == true && control.status === 'INVALID';
+		return this.sharedService.isInvalidControl(controlName, this.form)
 	}
 
 	ngOnInit(): void {
