@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
-import { Bookmark, ClientResponse, ToastType } from './../../../../lib/types.interface';
+import { Bookmark, ClientResponse, ToastType, Action } from './../../../../lib/types.interface';
 import { BookmarkService } from './../../../../services/bookmark/bookmark.service';
 import { ToastService } from '../../../../services/toast/toast.service';
 import { SharedService } from './../../../../services/shared/shared.service';
@@ -36,11 +36,11 @@ export class BookmarkFormComponent implements OnInit {
 			tags: new FormControl(val?.tags?.toString(), [Validators.required]),
 			short: new FormControl(val?.short, [Validators.required]),
 			url: new FormControl(val?.url, [Validators.required]),
-			date: new FormControl(this.parseDate(val?.date), [Validators.required]),
+			date: new FormControl(this.sharedService.getDate(val?.date), [Validators.required]),
 		})
 	}
 
-	public onSubmitForm() {
+	public onSubmitForm = () => {
 		if (this.form.invalid) {
 			this.form.markAllAsTouched();
 			this.isLoading = false;
@@ -59,12 +59,12 @@ export class BookmarkFormComponent implements OnInit {
 
 		// save bookmark
 		this.isLoading = true;
-		const action = this.default?._id ? 'update' : 'create';
+		const action = this.default?._id ? Action.update : Action.create;
 		this.bookmarkService.saveBookmark(bookmark, action)
 			.pipe(map(x => x.data))
 			.subscribe({
 				next: (res) => this.onBookmarkSaved(res),
-				error: (err) => this.onBookmarkFailed(err)
+				error: (err) => this.onSavingBookmarkFailed(err)
 			});
 	}
 
@@ -79,19 +79,12 @@ export class BookmarkFormComponent implements OnInit {
 		}
 	}
 
-	private onBookmarkFailed(err: any): void {
+	private onSavingBookmarkFailed(err: any): void {
 		this.toastService.show({
 			title: 'Failed',
 			message: err.message ?? 'Bookmark Failed To Save.',
 			type: ToastType.success
 		})
-	}
-
-	private parseDate(value?: string) {
-		if (!value) return new Date().toISOString().slice(0, 10);
-
-		const parse = Date.parse(value);
-		return new Date(parse).toISOString().slice(0, 10);
 	}
 
 }

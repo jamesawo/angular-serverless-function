@@ -50,6 +50,11 @@ export enum PageEnum {
 	bookmark
 }
 
+export enum Action {
+	create,
+	update
+}
+
 export enum ToastType {
 	warning,
 	success,
