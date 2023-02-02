@@ -23,10 +23,10 @@ export class PostFormComponent implements OnInit {
 		this.form = this.fb.group({
 			title: new FormControl('', [Validators.required]),
 			date: new FormControl(new Date(), [Validators.required]),
-			tags: new FormControl(''),
-			content: new FormControl(''),
-			author: new FormControl(''),
-			excerpt: new FormControl(''),
+			tags: new FormControl('', [Validators.required]),
+			content: new FormControl('', [Validators.required]),
+			author: new FormControl('', []),
+			excerpt: new FormControl('', [Validators.required]),
 		})
 	}
 

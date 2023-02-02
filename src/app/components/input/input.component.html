@@ -1,6 +1,18 @@
 <div class="relative flex w-full flex-wrap items-stretch mb-5" [formGroup]="formGroup">
 	<label [for]="controlName" class="text-sm">{{controlName}}:</label>
-	<input [id]="controlName" [type]="type" [formControlName]="controlName" [placeholder]="'Enter '+ controlName"
-		[ngClass]="{'border-red-300': isValid(controlName)}"
-		class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full pr-10" />
+
+	<ng-container *ngIf="type === 'text-area'; else input">
+		<textarea [formControlName]="controlName" [id]="controlName" [placeholder]="'Enter '+ controlName "
+			[ngClass]="{'border-red-300': isValid(controlName)}"
+			class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full pr-10"
+			cols="10" rows="5"></textarea>
+	</ng-container>
+
+	<ng-template #input>
+		<input [id]="controlName" [type]="type" [formControlName]="controlName" [placeholder]="'Enter '+ controlName"
+			[ngClass]="{'border-red-300': isValid(controlName)}"
+			class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full pr-10" />
+	</ng-template>
+
+
 </div>

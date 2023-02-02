@@ -1,6 +1,8 @@
 import { FormGroup } from '@angular/forms';
 import { Component, Input } from '@angular/core';
 
+enum InputField { }
+
 @Component({
 	selector: 'app-input',
 	templateUrl: './input.component.html',

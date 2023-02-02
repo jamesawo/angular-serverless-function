@@ -1,9 +1,12 @@
 <app-modal>
 	<form [formGroup]="form" (submit)="onSubmitForm()">
-		<app-input controlName="url" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
-		<app-input controlName="short" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
+		<app-input controlName="title" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
+		<app-input controlName="excerpt" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
+		<app-input controlName="author" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
 		<app-input controlName="tags" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
 		<app-input controlName="date" type="date" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
+		<app-input controlName="content" type="text-area" [formGroup]="form" [isValid]="isInvalidControl"></app-input>
+
 
 		<div class="relative flex w-full flex-wrap items-stretch mb-3">
 			<app-button [loading]="isLoading" text="Save" type="submit"></app-button>
