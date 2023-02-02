@@ -12,4 +12,11 @@ export class SharedService {
 		const control = form?.controls[controlName];
 		return control.touched == true && control.status === 'INVALID';
 	}
+
+	public getDate(value?: string) {
+		if (!value) return new Date().toISOString().slice(0, 10);
+
+		const parse = Date.parse(value);
+		return new Date(parse).toISOString().slice(0, 10);
+	}
 }

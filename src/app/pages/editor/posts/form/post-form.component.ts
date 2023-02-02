@@ -1,6 +1,7 @@
+import { BlogPost } from './../../../../lib/types.interface';
 import { SharedService } from './../../../../services/shared/shared.service';
 import { PostService } from '../../../../services/blog/post.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,7 +10,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 	styles: []
 })
 export class PostFormComponent implements OnInit {
-
+	@Input()
+	public defaultValue?: BlogPost;
 	public form: FormGroup = new FormGroup({});
 	public isLoading = false;
 
@@ -20,17 +22,25 @@ export class PostFormComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
+		let value = this.defaultValue;
+
 		this.form = this.fb.group({
-			title: new FormControl('', [Validators.required]),
-			date: new FormControl(new Date(), [Validators.required]),
-			tags: new FormControl('', [Validators.required]),
-			content: new FormControl('', [Validators.required]),
-			author: new FormControl('', []),
-			excerpt: new FormControl('', [Validators.required]),
+			title: new FormControl(value?.title, [Validators.required]),
+			date: new FormControl(this.sharedService.getDate(value?.date), [Validators.required]),
+			tags: new FormControl(value?.tags?.toString(), [Validators.required]),
+			content: new FormControl(value?.content, [Validators.required]),
+			author: new FormControl(value?.author, []),
+			excerpt: new FormControl(value?.excerpt, [Validators.required]),
 		})
 	}
 
-	onSubmitForm() {
+	public onSubmitForm = () => {
+		if (this.form.invalid) {
+			this.form.markAllAsTouched();
+			return;
+		}
+		this.isLoading = true;
+		console.log(this.form.value);
 	}
 
 	public isInvalidControl = (controlName: string): boolean => {
