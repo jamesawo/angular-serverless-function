@@ -1,8 +1,9 @@
-import { BlogPost } from './../../../../lib/types.interface';
-import { SharedService } from './../../../../services/shared/shared.service';
-import { PostService } from '../../../../services/blog/post.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BlogPost, Action, ClientResponse, ToastType } from './../../../../lib/types.interface';
+import { ToastService } from 'src/app/services/toast/toast.service';
+import { SharedService } from './../../../../services/shared/shared.service';
+import { PostService } from '../../../../services/blog/post.service';
 
 @Component({
 	selector: 'app-post-form',
@@ -18,7 +19,8 @@ export class PostFormComponent implements OnInit {
 	public constructor(
 		private postService: PostService,
 		private fb: FormBuilder,
-		private sharedService: SharedService
+		private sharedService: SharedService,
+		private toastService: ToastService,
 	) { }
 
 	ngOnInit(): void {
@@ -40,11 +42,38 @@ export class PostFormComponent implements OnInit {
 			return;
 		}
 		this.isLoading = true;
-		console.log(this.form.value);
+		const formValues: BlogPost = this.form.value;
+		const action = this.defaultValue?._id ? Action.update : Action.create;
+
+		this.postService.savePost(formValues, action).subscribe({
+			next: (response) => { this.onPostSavedSuccess(response) },
+			error: (error) => { this.onPostSaveFailed(error) }
+		})
+
 	}
 
 	public isInvalidControl = (controlName: string): boolean => {
 		return this.sharedService.isInvalidControl(controlName, this.form)
+	}
+
+	private onPostSavedSuccess(response: { data: ClientResponse }) {
+		this.isLoading = false;
+		let { data } = response;
+		if (response && data.acknowledged) {
+			this.toastService.show({
+				title: 'Success',
+				message: 'Post Saved Successfully',
+				type: ToastType.success
+			})
+		}
+	}
+
+	private onPostSaveFailed(error: any) {
+		this.toastService.show({
+			title: 'Failed',
+			message: error.message ?? 'Post Failed To Save.',
+			type: ToastType.error
+		})
 	}
 
 

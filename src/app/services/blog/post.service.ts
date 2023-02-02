@@ -1,7 +1,7 @@
 import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { BlogPost, Table } from './../../lib/types.interface';
+import { BlogPost, Table, Action, ClientResponse } from './../../lib/types.interface';
 
 @Injectable()
 export class PostService {
@@ -18,8 +18,24 @@ export class PostService {
 		if (!this.posts$) this.loadPosts();
 	}
 
-	public savePost(post: BlogPost) {
-		return this.http.post(`${this.baseUrl}`, post);
+	public savePost(post: BlogPost, action: Action) {
+		if (action === Action.update) {
+			return this.updatePost(post);
+		} else {
+			return this.createPost(post);
+		}
+	}
+
+	private updatePost(post: BlogPost) {
+		return this.http.put<{ data: ClientResponse }>(`${this.baseUrl}`, post);
+	}
+
+	private createPost(post: BlogPost) {
+		return this.http.post<{ data: ClientResponse }>(`${this.baseUrl}`, post);
+	}
+
+	private removePost(id: string) {
+		return this.http.delete<{ data: ClientResponse }>(`${this.baseUrl}?postId=${id}`);
 	}
 
 	private loadPosts(): void {

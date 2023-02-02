@@ -80,10 +80,11 @@ export class BookmarkFormComponent implements OnInit {
 	}
 
 	private onSavingBookmarkFailed(err: any): void {
+		this.isLoading = false;
 		this.toastService.show({
 			title: 'Failed',
 			message: err.message ?? 'Bookmark Failed To Save.',
-			type: ToastType.success
+			type: ToastType.error
 		})
 	}
 
