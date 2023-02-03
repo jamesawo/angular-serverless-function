@@ -62,15 +62,13 @@ const put = async (event: HandlerEvent) => {
 
 	const client = new MongoClient(process.env['MONGODB_URL']);
 	const post: BlogPost = JSON.parse(event.body);
+	const { _id, ...restPost } = post;
 
 	try {
 		const database = client.db(process.env['MONGODB_NAME']);
 		const result = await database.collection("posts").updateOne(
-			{ id: new ObjectId(post._id) },
-			{
-				$set: post,
-			},
-			{ upsert: true }
+			{ _id: new ObjectId(_id) },
+			{ $set: restPost, },
 		);
 
 		return result;

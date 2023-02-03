@@ -1,3 +1,4 @@
+import { ModalService } from './../../../modal/modal.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BlogPost, Action, ClientResponse, ToastType } from './../../../../lib/types.interface';
@@ -21,6 +22,7 @@ export class PostFormComponent implements OnInit {
 		private fb: FormBuilder,
 		private sharedService: SharedService,
 		private toastService: ToastService,
+		private modalService: ModalService<PostFormComponent>
 	) { }
 
 	ngOnInit(): void {
@@ -44,11 +46,10 @@ export class PostFormComponent implements OnInit {
 		this.isLoading = true;
 
 		const formValues: BlogPost = this.form.value;
+		const defaultPostId = this.defaultValue?._id;
+		const action = defaultPostId ? Action.update : Action.create;
+		formValues._id = defaultPostId;
 		this.updateTags(formValues);
-		const action = this.defaultValue?._id ? Action.update : Action.create;
-
-		console.log(action);
-		return;
 
 		this.postService.savePost(formValues, action).subscribe({
 			next: (response) => { this.onPostSavedSuccess(response) },
@@ -76,6 +77,7 @@ export class PostFormComponent implements OnInit {
 				message: 'Post Saved Successfully',
 				type: ToastType.success
 			})
+			this.modalService.close();
 		}
 	}
 
