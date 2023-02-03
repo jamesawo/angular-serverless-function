@@ -1,10 +1,10 @@
-import { ToastService } from 'src/app/services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { BlogPost, TableData, Table, ToastType } from './../../../lib/types.interface';
 import { PostService } from './../../../services/blog/post.service';
 import { ModalService } from './../../modal/modal.service';
 import { PostFormComponent } from './form/post-form.component';
+import { ToastService } from 'src/app/services/toast/toast.service';
 
 
 @Component({
@@ -26,17 +26,17 @@ export class PostsComponent implements OnInit {
 		this.setEditorPosts();
 	}
 
+	private async setEditorPosts(): Promise<void> {
+		const response = await firstValueFrom(this.postService.posts$!);
+		response.forEach(post => this.postTableData.data.push(this.toTableData(post)))
+		this.postTableData.action = { onEdit: this.onEditPost, onRemove: this.onRemovePost }
+	}
+
 	public onOpenModal = async (): Promise<void> => {
 		await this.modalService.open({
 			component: PostFormComponent,
 			modalTitle: 'Create Post'
 		});
-	}
-
-	private async setEditorPosts(): Promise<void> {
-		const response = await firstValueFrom(this.postService.posts$!);
-		response.forEach(post => this.postTableData.data.push(this.toTableData(post)))
-		this.postTableData.action = { onEdit: this.onEditPost, onRemove: this.onRemovePost }
 	}
 
 	private toTableData(post: BlogPost): TableData<BlogPost> {
@@ -56,7 +56,13 @@ export class PostsComponent implements OnInit {
 		const result: boolean = confirm('Are you sure?');
 		if (id && result) {
 			this.postService.removePost(id).subscribe({
-				next: () => { this.toastService.show({ title: "Removed", message: "Post Removed Successfully!", type: ToastType.success }) }
+				next: () => {
+					this.toastService.show({
+						title: "Removed",
+						message: "Post Removed Successfully!",
+						type: ToastType.success
+					})
+				}
 			});
 
 		}

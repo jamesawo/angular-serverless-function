@@ -1,7 +1,7 @@
 import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { BlogPost, Table, Action, ClientResponse } from './../../lib/types.interface';
+import { BlogPost, Action, ClientResponse } from './../../lib/types.interface';
 
 @Injectable()
 export class PostService {
