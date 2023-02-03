@@ -23,6 +23,7 @@ export class BookmarksComponent implements OnInit {
 		this.setBookmarks();
 	}
 
+
 	public onOpenModal = async (): Promise<void> => {
 		//const { BookmarkFormComponent } = await import('../bookmarks/bookmark-form/bookmark-form.component');
 		await this.modalService.open({
@@ -32,26 +33,27 @@ export class BookmarksComponent implements OnInit {
 	}
 
 	private async setBookmarks() {
+		this.bookmarkTable = { cols: [{ title: 'Bookmark' }], data: [] };
 		const bookmarks = await firstValueFrom(this.service.bookmarks$!);
 		bookmarks.forEach(bookmark => this.bookmarkTable.data.push(this.toTableData(bookmark)))
-		this.bookmarkTable.action = { onEdit: this.onEditProject, onRemove: this.onRemoveProject }
+		this.bookmarkTable.action = { onEdit: this.onEditBookmark, onRemove: this.onRemoveBookmark }
 	}
 
 	private toTableData(bookmark: Bookmark): TableData<Bookmark> {
 		return { id: bookmark._id!, title: bookmark.short || bookmark.url, obj: bookmark };
 	}
 
-	private onEditProject = async (id: string, data?: Bookmark): Promise<void> => {
+	private onEditBookmark = async (id: string, data?: Bookmark): Promise<void> => {
 		const found = this.bookmarkTable.data.find(tableData => tableData.id === id);
-		const param = { component: BookmarkFormComponent, modalTitle: 'Create Bookmark' };
+		const param = { component: BookmarkFormComponent, modalTitle: 'Update Bookmark' };
 		const defaultValue = { inputTitle: 'default', inputValue: found?.obj! };
 		await this.modalService.open(param, defaultValue);
 	}
 
-	private onRemoveProject = async (id: string): Promise<void> => {
+	private onRemoveBookmark = async (bookmarkId: string): Promise<void> => {
 		const result: boolean = confirm('Are you sure?');
-		if (result && id) {
-			this.service.removeBookmark(id).subscribe()
+		if (bookmarkId && result) {
+			this.service.removeBookmark(bookmarkId).subscribe();
 		}
 	}
 

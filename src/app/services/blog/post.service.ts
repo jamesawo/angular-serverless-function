@@ -19,23 +19,23 @@ export class PostService {
 	}
 
 	public savePost(post: BlogPost, action: Action) {
-		if (action === Action.update) {
+		if (action == Action.update) {
 			return this.updatePost(post);
 		} else {
 			return this.createPost(post);
 		}
 	}
 
-	private updatePost(post: BlogPost) {
-		return this.http.put<{ data: ClientResponse }>(`${this.baseUrl}`, post);
+	public removePost(id: string) {
+		return this.http.delete<{ data: ClientResponse }>(`${this.baseUrl}?postId=${id}`);
 	}
 
 	private createPost(post: BlogPost) {
 		return this.http.post<{ data: ClientResponse }>(`${this.baseUrl}`, post);
 	}
 
-	private removePost(id: string) {
-		return this.http.delete<{ data: ClientResponse }>(`${this.baseUrl}?postId=${id}`);
+	private updatePost(post: BlogPost) {
+		return this.http.put<{ data: ClientResponse }>(`${this.baseUrl}`, post);
 	}
 
 	private loadPosts(): void {

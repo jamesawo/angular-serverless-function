@@ -42,8 +42,13 @@ export class PostFormComponent implements OnInit {
 			return;
 		}
 		this.isLoading = true;
+
 		const formValues: BlogPost = this.form.value;
+		this.updateTags(formValues);
 		const action = this.defaultValue?._id ? Action.update : Action.create;
+
+		console.log(action);
+		return;
 
 		this.postService.savePost(formValues, action).subscribe({
 			next: (response) => { this.onPostSavedSuccess(response) },
@@ -54,6 +59,12 @@ export class PostFormComponent implements OnInit {
 
 	public isInvalidControl = (controlName: string): boolean => {
 		return this.sharedService.isInvalidControl(controlName, this.form)
+	}
+
+	private updateTags(post: BlogPost) {
+		const { tags } = this.form.value;
+		const tagsArr = tags.split(',') ?? []
+		post.tags = tagsArr;
 	}
 
 	private onPostSavedSuccess(response: { data: ClientResponse }) {

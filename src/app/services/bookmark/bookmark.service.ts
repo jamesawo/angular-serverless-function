@@ -18,7 +18,7 @@ export class BookmarkService {
 	}
 
 	public saveBookmark(bookmark: Bookmark, action: Action) {
-		if (action === Action.create) {
+		if (action == Action.create) {
 			return this.createBookmark(bookmark);
 		} else {
 			return this.updateBookmark(bookmark);

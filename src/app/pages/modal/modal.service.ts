@@ -42,7 +42,7 @@ export class ModalService<T, U = void> {
 		this.appRef.attachView(this.componentRef.hostView);
 
 		// if input (default value we want to pass to component), set component input value
-		if (input) this.componentRef.setInput('default', input?.inputValue);
+		if (input) this.componentRef.setInput(input.inputTitle, input?.inputValue);
 	}
 
 	private appendComponentToHtmlBody(): void {

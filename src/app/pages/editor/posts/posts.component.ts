@@ -3,7 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { BlogPost, TableData, Table } from './../../../lib/types.interface';
 import { PostService } from './../../../services/blog/post.service';
 import { ModalService } from './../../modal/modal.service';
-import { PostFormComponent as FormComponentType, PostFormComponent } from './form/post-form.component';
+import { PostFormComponent } from './form/post-form.component';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { PostFormComponent as FormComponentType, PostFormComponent } from './for
 })
 export class PostsComponent implements OnInit {
 
-	public payload: Table<BlogPost> = { cols: [{ title: 'Post Title' }], data: [] };
+	public postTableData: Table<BlogPost> = { cols: [{ title: 'Post Title' }], data: [] };
 
 	public constructor(
 		private postService: PostService,
@@ -33,20 +33,28 @@ export class PostsComponent implements OnInit {
 
 	private async setEditorPosts(): Promise<void> {
 		const response = await firstValueFrom(this.postService.posts$!);
-		response.forEach(post => this.payload.data.push(this.toTableData(post)))
-		this.payload.action = { onEdit: this.onEditPost, onRemove: this.onRemovePost }
+		response.forEach(post => this.postTableData.data.push(this.toTableData(post)))
+		this.postTableData.action = { onEdit: this.onEditPost, onRemove: this.onRemovePost }
 	}
 
 	private toTableData(post: BlogPost): TableData<BlogPost> {
 		return { id: post._id!, title: post.title, date: new Date(post.date).toDateString(), };
 	}
 
-	private onEditPost = (id: string, data?: BlogPost): void => {
-		console.log('editing post with id: ', id);
+	private onEditPost = async (id: string, data?: BlogPost): Promise<void> => {
+		const response = await firstValueFrom(this.postService.posts$!);
+		const found = response.find(data => data._id === id);
+
+		const param = { component: PostFormComponent, modalTitle: 'Update Post' };
+		const defaultValue = { inputTitle: 'defaultValue', inputValue: found! };
+		await this.modalService.open(param, defaultValue);
 	}
 
 	private onRemovePost = (id: string): void => {
-		console.log('removing post with id: ', id);
+		const result: boolean = confirm('Are you sure?');
+		if (id && result) {
+			this.postService.removePost(id).subscribe()
+		}
 	}
 
 }

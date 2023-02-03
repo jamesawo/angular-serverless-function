@@ -51,8 +51,8 @@ export enum PageEnum {
 }
 
 export enum Action {
-	create,
-	update
+	create = 'create',
+	update = 'update'
 }
 
 export enum ToastType {

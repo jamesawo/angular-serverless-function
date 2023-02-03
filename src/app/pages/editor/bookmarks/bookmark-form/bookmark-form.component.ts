@@ -1,3 +1,4 @@
+import { ModalService } from './../../../modal/modal.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
@@ -23,7 +24,8 @@ export class BookmarkFormComponent implements OnInit {
 		private bookmarkService: BookmarkService,
 		private fb: FormBuilder,
 		private toastService: ToastService,
-		private sharedService: SharedService
+		private sharedService: SharedService,
+		private modalService: ModalService<BookmarkFormComponent>
 	) { }
 
 	public isInvalidControl = (controlName: string): boolean => {
@@ -52,14 +54,16 @@ export class BookmarkFormComponent implements OnInit {
 		const splitShortAndJoin = short.split(' ').join('-');
 
 		let bookmark: Bookmark = {
-			url, date,
+			_id: this.default?._id,
+			url,
+			date,
 			tags: splitTags,
 			short: splitShortAndJoin,
 		};
 
 		// save bookmark
 		this.isLoading = true;
-		const action = this.default?._id ? Action.update : Action.create;
+		const action = bookmark?._id?.length ? Action.update : Action.create;
 		this.bookmarkService.saveBookmark(bookmark, action)
 			.pipe(map(x => x.data))
 			.subscribe({
@@ -76,6 +80,7 @@ export class BookmarkFormComponent implements OnInit {
 				message: 'Bookmark Saved Successfully',
 				type: ToastType.success
 			})
+			this.modalService.close();
 		}
 	}
 

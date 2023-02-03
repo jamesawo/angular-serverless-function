@@ -1,8 +1,5 @@
 import { Handler } from '@netlify/functions';
-
-import { create } from '../posts/create';
-import { all } from '../posts/all'
-
+import { remove, post, put, get } from '../posts/helper';
 
 const handler: Handler = async (event, context) => {
 
@@ -10,17 +7,19 @@ const handler: Handler = async (event, context) => {
 	try {
 		switch (event.httpMethod) {
 			case 'GET':
-				body = await all(event);
+				body = await get(event);
 				break;
 
 			case 'POST':
-				create(event);
+				body = await post(event);
 				break;
 
 			case 'PUT':
+				body = await put(event);
 				break;
 
 			case 'DELETE':
+				body = await remove(event.queryStringParameters.postId);
 				break;
 
 			default:
