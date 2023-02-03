@@ -1,6 +1,7 @@
+import { ToastService } from 'src/app/services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { BlogPost, TableData, Table } from './../../../lib/types.interface';
+import { BlogPost, TableData, Table, ToastType } from './../../../lib/types.interface';
 import { PostService } from './../../../services/blog/post.service';
 import { ModalService } from './../../modal/modal.service';
 import { PostFormComponent } from './form/post-form.component';
@@ -18,6 +19,7 @@ export class PostsComponent implements OnInit {
 	public constructor(
 		private postService: PostService,
 		private modalService: ModalService<PostFormComponent, BlogPost>,
+		private toastService: ToastService
 	) { }
 
 	ngOnInit(): void {
@@ -53,7 +55,10 @@ export class PostsComponent implements OnInit {
 	private onRemovePost = (id: string): void => {
 		const result: boolean = confirm('Are you sure?');
 		if (id && result) {
-			this.postService.removePost(id).subscribe()
+			this.postService.removePost(id).subscribe({
+				next: () => { this.toastService.show({ title: "Removed", message: "Post Removed Successfully!", type: ToastType.success }) }
+			});
+
 		}
 	}
 
