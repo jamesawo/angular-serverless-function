@@ -14,6 +14,7 @@ import { ModalModule } from "../modal/modal.module";
 import { PostFormComponent } from './posts/form/post-form.component';
 import { BookmarkFormComponent } from './bookmarks/bookmark-form/bookmark-form.component';
 import { InputComponent } from '../../components/input/input.component';
+import { ProjectFormComponent } from './projects/project-form/project-form.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { InputComponent } from '../../components/input/input.component';
 		PostFormComponent,
 		BookmarkFormComponent,
 		InputComponent,
+  ProjectFormComponent,
 	],
 	exports: [
 		EditorHeaderComponent,

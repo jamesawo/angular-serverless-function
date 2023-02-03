@@ -2,6 +2,8 @@ import { ProjectService } from './../../../services/project/project.service';
 import { Component, OnInit } from '@angular/core';
 import { Project, Table, TableData } from './../../../lib/types.interface';
 import { firstValueFrom } from 'rxjs';
+import { ModalService } from '../../modal/modal.service';
+import { ProjectFormComponent } from './project-form/project-form.component';
 
 @Component({
 	selector: 'app-projects',
@@ -12,10 +14,21 @@ export class ProjectsComponent implements OnInit {
 
 	public payload: Table<Project> = { cols: [{ title: 'Project Title' }], data: [] };
 
-	public constructor(private service: ProjectService) { }
+	public constructor(
+		private service: ProjectService,
+		private modalService: ModalService<ProjectFormComponent, Project>,
+
+	) { }
 
 	ngOnInit(): void {
 		this.setPayload();
+	}
+
+	public onOpenModal = async (): Promise<void> => {
+		await this.modalService.open({
+			component: ProjectFormComponent,
+			modalTitle: 'Create Project'
+		});
 	}
 
 	private async setPayload() {

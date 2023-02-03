@@ -12,6 +12,11 @@ export interface BlogPost {
 	views?: number;
 }
 
+export interface ProjectAction {
+	title: string;
+	link: string;
+}
+
 export interface Project {
 	_id?: string;
 	title: string;
@@ -21,10 +26,7 @@ export interface Project {
 	industries: string[];
 	tools: string[];
 	imageUrl: string;
-	action?: {
-		title: string;
-		link: string;
-	}
+	action?: ProjectAction;
 }
 
 export interface Bookmark {
