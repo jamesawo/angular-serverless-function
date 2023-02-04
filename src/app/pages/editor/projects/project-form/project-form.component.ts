@@ -36,11 +36,13 @@ export class ProjectFormComponent {
 		this.form = this.fb.group({
 			title: new FormControl(project?.title, [Validators.required]),
 			description: new FormControl(project?.description, [Validators.required]),
-			features: new FormControl(project?.features.toString(), [Validators.required]),
-			modules: new FormControl(project?.modules.toString(), [Validators.required]),
-			industries: new FormControl(project?.industries.toString(), [Validators.required]),
-			tools: new FormControl(project?.tools.toString(), [Validators.required]),
-			imageUrl: new FormControl(project?.imageUrl, [Validators.required]),
+			features: new FormControl(project?.features.toString(), []),
+			modules: new FormControl(project?.modules.toString(), []),
+			industries: new FormControl(project?.industries.toString(), []),
+			tools: new FormControl(project?.tools.toString(), []),
+			imageUrl: new FormControl(project?.imageUrl, []),
+			actionTitle: new FormControl(project?.action?.title, [Validators.required]),
+			actionLink: new FormControl(project?.action?.link, [Validators.required]),
 		})
 	}
 
@@ -55,6 +57,20 @@ export class ProjectFormComponent {
 
 		this.isLoading = true;
 		const action = defProject?._id?.length ? Action.update : Action.create;
+		const { features, modules, industries, tools, actionTitle, actionLink, } = this.form.value;
+
+		const project: Project = this.form.value;
+		project._id = defProject?._id;
+		project.features = features?.split(',') ?? [];
+		project.industries = industries?.split(',') ?? [];
+		project.modules = modules?.split(',') ?? [];
+		project.tools = tools?.split(',') ?? [];
+		project.action = { link: actionLink ?? '', title: actionTitle ?? '' }
+
+		this.projectService.saveProject(project, action).subscribe({
+			next: (res) => { this.onProjectSaved(res.data); },
+			error: (err) => { this.onSavingProjectFailed(err); }
+		})
 
 	}
 

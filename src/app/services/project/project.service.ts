@@ -8,7 +8,7 @@ import { Action, ClientResponse, Project } from './../../lib/types.interface';
 })
 export class ProjectService {
 	public projects$?: Observable<Project[]>
-	private baseUrl = window.location.origin + '/.netlify/functions/posts';
+	private baseUrl = window.location.origin + '/.netlify/functions/projects';
 
 	constructor(private http: HttpClient) {
 		if (!this.projects$) this.loadProjects();
@@ -35,9 +35,8 @@ export class ProjectService {
 	}
 
 	private loadProjects(): void {
-		const base = window.location.origin;
 		this.projects$ = this.http
-			.get<{ data: Project[] }>(`${base}/.netlify/functions/projects`)
+			.get<{ data: Project[] }>(`${this.baseUrl}`)
 			.pipe(map(e => e.data));
 	}
 }

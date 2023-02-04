@@ -1,9 +1,10 @@
-import { ProjectService } from './../../../services/project/project.service';
 import { Component, OnInit } from '@angular/core';
-import { Project, Table, TableData } from './../../../lib/types.interface';
 import { firstValueFrom } from 'rxjs';
 import { ModalService } from '../../modal/modal.service';
+import { ProjectService } from './../../../services/project/project.service';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import { ToastService } from 'src/app/services/toast/toast.service';
+import { Project, Table, TableData, ToastType } from './../../../lib/types.interface';
 
 @Component({
 	selector: 'app-projects',
@@ -17,7 +18,7 @@ export class ProjectsComponent implements OnInit {
 	public constructor(
 		private service: ProjectService,
 		private modalService: ModalService<ProjectFormComponent, Project>,
-
+		private toastService: ToastService
 	) { }
 
 	ngOnInit(): void {
@@ -41,12 +42,29 @@ export class ProjectsComponent implements OnInit {
 		return { id: project._id!, title: project.title, };
 	}
 
-	private onEditProject = (id: string, data?: Project): void => {
-		console.log('editing project with id: ', id);
+	private onEditProject = async (id: string, data?: Project): Promise<void> => {
+		const response = await firstValueFrom(this.service.projects$!);
+		const found = response.find(data => data._id === id);
+
+		const param = { component: ProjectFormComponent, modalTitle: 'Update Project' };
+		const defaultValue = { inputTitle: 'default', inputValue: found! };
+		await this.modalService.open(param, defaultValue);
 	}
 
 	private onRemoveProject = (id: string): void => {
-		console.log('removing project with id: ', id);
+		const result: boolean = confirm('Are you sure?');
+		if (id && result) {
+			this.service.removeProject(id).subscribe({
+				next: () => {
+					this.toastService.show({
+						title: "Removed",
+						message: "Project Removed Successfully!",
+						type: ToastType.success
+					})
+				}
+			});
+
+		}
 	}
 
 }
