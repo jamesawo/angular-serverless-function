@@ -7,7 +7,6 @@ import { Toast, ToastService } from '../../services/toast/toast.service';
 @Component({
 	selector: 'app-toast',
 	templateUrl: './toast.component.html',
-	styles: [],
 	animations: [
 		trigger(
 			'inOutAnimation',
@@ -30,7 +29,6 @@ import { Toast, ToastService } from '../../services/toast/toast.service';
 				)
 			]
 		)
-
 	]
 })
 export class ToastComponent implements OnInit {
