@@ -35,7 +35,7 @@ Please make sure that you have the latest version of Node.js installed on your m
 
 ## Author
 
-[James Aworo](https://github.com/jamesawo)
+[Aworo James](https://github.com/jamesawo)
 
 ## License
 
