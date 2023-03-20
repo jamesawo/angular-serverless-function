@@ -1,4 +1,4 @@
-# ☁️⚡ Building a Serverless Angular Blog Using Netlify Functions
+# ☁️⚡ Angular Serverless Function (Netlify Functions) & Mongodb
 
 This project is a simple blog website built using Angular (for the frontend) and connecting to Netlify Functions and storing data using MongoDB.
 
@@ -6,7 +6,7 @@ This is a basic project to learn and explore Serverless Architecture.
 
 ## Why
 
-Serverless architecture is a way of building and running applications and services without having to manage infrastructure. it provides a set of powerful tools to make websites and web applications both extremely performant and highly dynamic.
+Serverless architecture is a way of building and running applications and services without having to manage infrastructure. It provides a set of powerful tools to make websites and web applications both extremely performant and highly dynamic.
 
 ## Project setup
 
